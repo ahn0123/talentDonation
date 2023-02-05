@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talentDonation.mapper.AdminMapper">
+	<!-- 검색 조건문(회원현황) -->
+    <sql id="criteria">
+        <if test="type != null and keyword != null">
+            <trim prefix="and " suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'I'.toString()">
+                                m.mem_id LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'N'.toString()">
+                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'E'.toString()">
+                                m.mem_email LIKE '%'|| #{keyword} ||'%'
+                            </when>                            
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+	<!-- 회원정보 가져오기 -->
+    <select id="getMemberList" parameterType="list" resultType="com.talentDonation.dto.Member">
+        <!-- select * from (select ~ from (select~ ) 서브쿼리 alias where rownum <= #{pageNum}*#{amount} ) where rnum>(#{pageNum}-1)*#{amount} -->
+        select * from (select rownum as rn, m.* from member m where m.mem_type = 1
+        <if test="keyword != null">
+           <include refid="criteria"></include>
+        </if>        
+        ) T1
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})
+        <!-- where rn between 1 and 10 -->       
+    </select>
+    
+    <!-- 회원 총 인원수 -->
+    <select id="getMemberAdminTotal" resultType="int">
+        select count(*) from member m where m.mem_type = 1
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+    </select>
+    
+    <!-- 회원정보 가져오기(Admin) -->
+    <select id="getMemberDetail" resultType="com.talentDonation.dto.Member">
+        select * from member where mem_id= #{memId}
+    </select>
+    
+    <!-- 트레이너정보 가져오기 -->
+    <select id="getTrainerList" parameterType="list" resultType="com.talentDonation.dto.Member">
+        <!-- select * from (select ~ from (select~ ) 서브쿼리 alias where rownum <= #{pageNum}*#{amount} ) where rnum>(#{pageNum}-1)*#{amount} -->
+        select * from (select rownum as rn, m.* from member m where m.mem_type = 2
+        <if test="keyword != null">
+           <include refid="criteria"></include>
+        </if>        
+        ) T1
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})
+        <!-- where rn between 1 and 10 -->       
+    </select>
+    
+    <!-- 트레이너 총 인원수 -->
+    <select id="getTrainerAdminTotal" resultType="int">
+        select count(*) from member m where m.mem_type = 2
+        <if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>
+    </select>
+    
+    <!-- 회원정보 가져오기(Admin) -->
+    <select id="getTrainerDetail" resultType="com.talentDonation.dto.Member">
+        select * from member where mem_id= #{memId}
+    </select>
+    
+</mapper>
