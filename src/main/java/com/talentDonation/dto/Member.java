@@ -12,5 +12,9 @@ public class Member {
 	private int memStatus;
 	private int memType;
 
+	private String trMemId;
+	private String trCareer;
+	private String trLicense;
+
 	private int rn;
 }

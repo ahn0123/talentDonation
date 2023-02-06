@@ -71,56 +71,18 @@ public class HomeController {
             if (member != null) {
                 session.setAttribute("member", member);
             } else {
-                model.addAttribute("msg", "아이디 또는 비밀번호가 올바르지 않습니다.");
+                model.addAttribute("msg", "아이디 또는 비밀번호가 올바르지 않습니다");
                 return "user/login";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("msg", "로그인 중 문제가 발생했습니다.");
+            model.addAttribute("msg", "로그인 중 문제가 발생했습니다");
             return "user/login";
         }
         session.setAttribute("sessionId", userMapper.getId(map.get("memId"))); // 세션값 등록
         model.addAttribute("sessionId", session.getAttribute("sessionId"));
         return "redirect:/";
     }
-
-	// 로그인
-//	@PostMapping("/login")
-//	public String login(Model model, @RequestParam("memId") String memId,
-//			@RequestParam("memPwd") String memPwd, HttpSession session) {
-//		try {
-//			if (memId == null || memPwd == null) {
-//				model.addAttribute("msg", "아이디 또는 비밀번호를 입력해주세요");
-//				return "user/login";
-//			}
-//
-//			String userId = userMapper.getId(memId);
-//			String userPw = userMapper.getPw(memId);
-//
-//			if (userId == null) {
-//				model.addAttribute("msg", "아이디가 올바르지 않습니다.");
-//				return "user/login";
-//			}
-//
-//			if (userPw == null) {
-//				model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-//				return "user/login";
-//			}
-//
-//			/*if (!passwordEncoder.matches(password, userPw)) {
-//				model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-//				return "login";
-//			}*/
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			model.addAttribute("msg", "로그인 중 문제가 발생했습니다.");
-//			return "user/login";
-//		}
-//		session.setAttribute("sessionId", userMapper.getId(memId)); // 세션값 등록
-//		model.addAttribute("sessionId", session.getAttribute("sessionId"));
-//		return "redirect:index";
-//	}
 
 	// 로그아웃
 	@GetMapping("/logout")
@@ -138,7 +100,6 @@ public class HomeController {
 
     //회원가입 정보 등록
     @PostMapping("/signUp")
-//    public String singUp(Model model, @ModelAttribute Member member) {
     public String singUp(Model model, @ModelAttribute Member member) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         member.setMemPwd(Encryption.encrypt(member.getMemPwd()));
         userMapper.addMember(member);

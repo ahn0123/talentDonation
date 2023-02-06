@@ -32,7 +32,15 @@
 					</ul>
 				</li>
 				<li><a href="generic.jsp">교육과정</a></li>
-				<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">마이페이지</a></li>
+				<li>
+					<a href="<%=request.getContextPath()%>/myPage/myPageMember">마이페이지</a>
+					<ul>
+						<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">회원정보 수정</a></li>
+						<li><a href="#">신청현황</a></li>
+						<li><a href="#">교육일지</a></li>
+						<li><a href="<%=request.getContextPath()%>/myPage/addDog">반려견 정보</a></li>
+					</ul>
+				</li>
 				<li><a href="elements.jsp">교육후기</a></li>				
 				<c:if test="${sessionId eq 'admin123'}">
                 <li>

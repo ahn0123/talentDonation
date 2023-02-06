@@ -7,6 +7,11 @@
         update member
         set mem_pwd=#{memPwd}, mem_name=#{memName}, mem_tel=#{memTel}, mem_email=#{memEmail}        
         where mem_id = #{memId}
-    </update>    
+    </update> 
+    
+    <!-- 반려견 등록 -->   
+    <insert id="addDog">
+    	insert into dog values(dog_id.nextval, #{dogMemId}, #{dogName}, #{dogBreed}, #{dogBirthday}, #{dogWeight}, #{dogRemark}, 1)
+    </insert>
     
 </mapper>

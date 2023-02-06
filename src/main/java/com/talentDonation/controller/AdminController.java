@@ -3,11 +3,14 @@ package com.talentDonation.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.PageMakerDTO;
+import com.talentDonation.dto.Trainer;
 import com.talentDonation.mapper.AdminMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -51,8 +54,22 @@ public class AdminController {
 	// 트레이너정보 가져오기(Admin)
 	@GetMapping("/trainerDetail")
 	public String trainerDetail(Model model, @RequestParam("memId") String memId) {
-		model.addAttribute("list", adminMapper.getMemberDetail(memId)); //트레이너정보 가져오기(Admin)
+		model.addAttribute("list", adminMapper.getTrainerDetail(memId)); //트레이너정보 가져오기(Admin)
 		return "admin/trainerDetail";
 	}
+
+	//트레이너 정보 추가 등록
+    @PostMapping("/addTrainer")
+    public String addTrainer(Model model, @ModelAttribute Trainer trainer) {
+        adminMapper.addTrainer(trainer);
+        return "redirect:/admin/trainerList";
+    }
+
+    //트레이너 정보 수정(ajax)
+    @PostMapping(path = "/modifyTrainerInfo", produces = "text/json; charset=utf-8")
+    public String modifyTrainerInfo(Model model, @ModelAttribute Trainer trainer) {
+        adminMapper.modifyTrainerInfo(trainer);
+        return "redirect:/admin/trainerList";
+    }
 
 }

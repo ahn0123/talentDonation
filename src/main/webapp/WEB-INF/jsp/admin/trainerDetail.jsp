@@ -23,7 +23,7 @@
 				<br>
 				<div class="content"> <!-- start of content -->
 				    <div class="form">
-						<form method="post" action="/trainerDetail" modelAttribute="member" id="trSignUpForm">
+						<form method="post" action="/admin/addTrainer" id="trSignUpForm">
 							<c:forEach var="list" items="${list}">
 							<div class="fields">
 								<div class="field">
@@ -44,11 +44,11 @@
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">경력</label>
-									<textarea name="trCareer" id="trCareer" rows="3" placeholder="경력사항을 작성해주세요"></textarea>
+									<textarea name="trCareer" id="trCareer" rows="3" placeholder="경력사항을 작성해주세요" value="${list.trCareer}">${list.trCareer}</textarea>
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">자격증</label>
-									<textarea name="trLicense" id="trLicense" rows="3" placeholder="자격증을 작성해주세요"></textarea>
+									<textarea name="trLicense" id="trLicense" rows="3" placeholder="자격증을 작성해주세요" value="${list.trLicense}">${list.trLicense}</textarea>
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">회원유형</label>
@@ -67,8 +67,8 @@
 							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
-								<li><input type="button" value="등록" class="button primary" id=""></li>
-								<li><input type="button" value="수정" class="button primary" id=""></li>
+								<li><input type="button" value="등록" class="button primary" id="addTrainer_btn"></li>
+								<li><input type="button" value="수정" class="button primary" id="editTrainer_btn"></li>
 								<li><input type="button" value="목록가기" class="button" onclick="location.href='trainerList'"></li>
 							</ul>
 						</form>
@@ -89,6 +89,55 @@
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+
+<script>
+	//빈 칸이 있는지 확인
+	$(document).ready(function (e) {
+	
+		$("#addTrainer_btn").click(function () {
+	
+			const trCareer = $("#trCareer").val().replaceAll(" ", "");
+			const trLicense = $("#trLicense").val().replaceAll(" ", "");
+	
+			if (!trCareer) {
+				alert("경력사항을 작성해주세요");
+			} else if (!trLicense) {
+				alert("자격증을 작성해주세요");
+			} else {
+				$("#trSignUpForm").submit();
+			}
+	
+		})
+	})
+	
+	// ajax (트레이너 수정)
+	$("#editTrainer_btn").click(function (){
+	
+		var memId = document.getElementById('memId').value;
+		var trCareer = document.getElementById('trCareer').value;
+		var trLicense = document.getElementById('trLicense').value;
+		
+		var param = {
+			memId: memId,
+			trCareer: trCareer,
+			trLicense: trLicense		
+		};            
+		 
+		$.ajax({		
+			type : "post",
+			data : param,
+			url : "/admin/modifyTrainerInfo",
+			 
+			success : function(result) {
+				alert("성공적으로 수정되었습니다");	
+			},		
+			error : function(result) {
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);		
+			}	 
+		});
+		
+	});
+</script>
 
 </body>
 </html>

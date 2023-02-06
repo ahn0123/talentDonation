@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.talentDonation.dto.Dog;
 import com.talentDonation.dto.Member;
 import com.talentDonation.mapper.MyPageMapper;
 import com.talentDonation.mapper.UserMapper;
@@ -93,5 +94,18 @@ public class MyPageController {
             return "/myPage/deleteMember";
         }
 
+    }
+
+    //반려견 등록 페이지로 이동
+    @GetMapping("/addDog")
+    public String addDog(Model model, HttpSession session) {
+        return  "myPage/addDog";
+    }
+
+    //반려견 등록 페이지
+    @PostMapping("/addDog")
+    public String addDog(Model model, @ModelAttribute Dog dog) {
+    	myPageMapper.addDog(dog);
+        return "myPage/addDog";
     }
 }

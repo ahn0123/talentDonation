@@ -8,5 +8,7 @@ public class Trainer {
 	private String trCareer;
 	private String trLicense;
 
+	private String memId;
+
 	private int rn;
 }
