@@ -87,4 +87,20 @@
         where tr_mem_id = #{memId}
     </update>
     
+    <!--  트레이너명 가져오기 -->
+    <select id="getTrainerName" resultType="com.talentDonation.dto.Trainer">
+        select * from (select rownum as rn, t.*, m.mem_name from trainer t join member m on t.tr_mem_id=m.mem_id)
+    </select>
+    
+    <!--  키워드명 가져오기 -->
+    <select id="getKeyName" resultType="com.talentDonation.dto.Keyword">
+        select * from (select rownum as rn, k.* from keyword k)
+    </select>
+    
+    <!-- 프로그램 추가 -->
+	<insert id="addProgram">
+        insert into program(prog_id, prog_trmem_id, prog_key_id, prog_title, prog_location, prog_price, prog_recruit_num, prog_content, prog_rsv_status, prog_status, prog_due, prog_start_date, prog_end_date)
+        values (prog_id.nextval, #{progTrmemId}, #{progKeyId}, #{progTitle}, #{progLocation}, #{progPrice}, #{progRecruitNum}, #{progContent}, #{progRsvStatus}, #{progStatus}, #{progDue}, #{progStartDate}, #{progEndDate})
+    </insert>
+    
 </mapper>

@@ -38,7 +38,7 @@
 						<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">회원정보 수정</a></li>
 						<li><a href="#">신청현황</a></li>
 						<li><a href="#">교육일지</a></li>
-						<li><a href="<%=request.getContextPath()%>/myPage/addDog">반려견 정보</a></li>
+						<li><a href="<%=request.getContextPath()%>/myPage/dogList">반려견 정보</a></li>
 					</ul>
 				</li>
 				<li><a href="elements.jsp">교육후기</a></li>				
@@ -48,7 +48,8 @@
                 	<ul>
 						<li><a href="/admin/memberList">회원목록</a></li>
 						<li><a href="/admin/trainerList">트레이너목록</a></li>
-						<li><a href="#">Option Three</a></li>
+						<li><a href="#">교육목록</a></li>
+						<li><a href="#">키워드목록</a></li>
 						<li>
 							<a href="#">Submenu</a>
 							<ul>

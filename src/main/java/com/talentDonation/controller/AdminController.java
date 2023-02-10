@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.PageMakerDTO;
+import com.talentDonation.dto.Program;
 import com.talentDonation.dto.Trainer;
 import com.talentDonation.mapper.AdminMapper;
 
@@ -58,18 +59,45 @@ public class AdminController {
 		return "admin/trainerDetail";
 	}
 
-	//트레이너 정보 추가 등록
+	// 트레이너 정보 추가 등록
     @PostMapping("/addTrainer")
     public String addTrainer(Model model, @ModelAttribute Trainer trainer) {
         adminMapper.addTrainer(trainer);
         return "redirect:/admin/trainerList";
     }
 
-    //트레이너 정보 수정(ajax)
+    // 트레이너 정보 수정(ajax)
     @PostMapping(path = "/modifyTrainerInfo", produces = "text/json; charset=utf-8")
     public String modifyTrainerInfo(Model model, @ModelAttribute Trainer trainer) {
         adminMapper.modifyTrainerInfo(trainer);
         return "redirect:/admin/trainerList";
     }
+
+    // 프로그램 등록화면 불러오기
+    @GetMapping("/addProgram")
+    public String addProgram() {
+    	return "admin/addProgram";
+    }
+
+    // 프로그램 등록화면 불러오기
+    @PostMapping("/addProgram")
+    public String addProgram(Model model, @ModelAttribute Program program) {
+    	adminMapper.addProgram(program);
+        return "admin/addProgram";
+    }
+
+    // 트레이너 리스트 팝업
+  	@GetMapping("/trainerListPopup")
+  	public String trainerListPopup(Model model) {
+  		model.addAttribute("list", adminMapper.getTrainerName()); // 트레이너명 가져오기
+  		return "admin/trainerListPopup";
+  	}
+
+  	// 키워드 리스트 팝업
+   	@GetMapping("/keyListPopup")
+   	public String keyListPopup(Model model) {
+   		model.addAttribute("list", adminMapper.getKeyName()); // 키워드명 가져오기
+   		return "admin/keyListPopup";
+   	}
 
 }

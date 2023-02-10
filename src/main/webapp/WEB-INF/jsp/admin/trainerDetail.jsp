@@ -18,7 +18,7 @@
 		<div class="wrapper">
 			<div class="inner3">
 				<header class="major">
-					<h2>트레이너상세내역</h2>
+					<h2>트레이너상세정보</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -132,7 +132,7 @@
 				alert("성공적으로 수정되었습니다");	
 			},		
 			error : function(result) {
-				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);		
+				alert("오류가 발생했습니다");	
 			}	 
 		});
 		

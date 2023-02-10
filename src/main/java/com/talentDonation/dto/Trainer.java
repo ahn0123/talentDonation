@@ -9,6 +9,7 @@ public class Trainer {
 	private String trLicense;
 
 	private String memId;
+	private String memName;
 
 	private int rn;
 }

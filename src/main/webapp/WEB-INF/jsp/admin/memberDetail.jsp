@@ -18,7 +18,7 @@
 		<div class="wrapper">
 			<div class="inner3">
 				<header class="major">
-					<h2>회원상세내역</h2>
+					<h2>회원상세정보</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->

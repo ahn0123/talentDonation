@@ -37,7 +37,7 @@ public class MyPageController {
 	private final UserMapper userMapper;
 	private final EncryptionService Encryption;
 
-	//회원정보 조회
+	// 회원정보 조회
     @GetMapping("/myPageMember")
     public String myPageMember(Model model, HttpSession session) {
     	String memId = (String) session.getAttribute("sessionId");
@@ -96,16 +96,47 @@ public class MyPageController {
 
     }
 
-    //반려견 등록 페이지로 이동
+    // 반려견 등록 페이지로 이동
     @GetMapping("/addDog")
     public String addDog(Model model, HttpSession session) {
         return  "myPage/addDog";
     }
 
-    //반려견 등록 페이지
+    // 반려견 등록 페이지
     @PostMapping("/addDog")
     public String addDog(Model model, @ModelAttribute Dog dog) {
     	myPageMapper.addDog(dog);
         return "myPage/addDog";
+    }
+
+    // 전체 반려견정보 가져오기
+ 	@GetMapping("/dogList")
+ 	public String dogList(Model model, HttpSession session) {
+ 		String dogMemId = (String) session.getAttribute("sessionId");
+ 		model.addAttribute("list", myPageMapper.getDogList(dogMemId)); //전체 반려견정보 가져오기
+ 		return "myPage/dogList";
+ 	}
+
+ 	// 반려견정보 가져오기
+ 	@GetMapping("/dogDetail")
+ 	public String dogDetail(Model model, @RequestParam("dogId") String dogId) {
+ 		model.addAttribute("list", myPageMapper.getDogDetail(dogId)); //반려견정보 가져오기
+ 		return "myPage/dogDetail";
+ 	}
+
+ 	// 반려견정보 수정
+  	@PostMapping("/modifyDogInfo")
+  	public String modifyDogInfo(@ModelAttribute Dog dog) {
+  		//String dogname = dog.getDogName();
+  		//log.info("dogname:"+dogname);
+  		myPageMapper.modifyDogInfo(dog);
+  		return "redirect:/myPage/dogList";
+  	}
+
+  	// 반려견 삭제(ajax)
+    @PostMapping(path = "/deleteDog", produces = "text/json; charset=utf-8")
+    public String deleteDog(Model model, @ModelAttribute Dog dog) {
+        myPageMapper.deleteDog(dog);
+        return "redirect:/myPage/dogList";
     }
 }

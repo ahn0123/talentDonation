@@ -14,4 +14,28 @@
     	insert into dog values(dog_id.nextval, #{dogMemId}, #{dogName}, #{dogBreed}, #{dogBirthday}, #{dogWeight}, #{dogRemark}, 1)
     </insert>
     
+    <!-- 전체 반려견정보 가져오기 -->
+    <select id="getDogList" parameterType="list" resultType="com.talentDonation.dto.Dog">
+        select * from dog where dog_mem_id=#{dogMemId} and dog_status=1
+    </select>
+    
+    <!-- 반려견정보 가져오기 -->
+    <select id="getDogDetail" resultType="com.talentDonation.dto.Dog">
+        select * from dog where dog_id= #{dogId}
+    </select>
+    
+    <!-- 반려견정보 수정 -->
+    <update id="modifyDogInfo">
+        update dog
+        set dog_name=#{dogName}, dog_breed=#{dogBreed}, dog_birthday=#{dogBirthday}, dog_weight=#{dogWeight}, dog_remark=#{dogRemark}            
+        where dog_id = #{dogId}
+    </update>
+    
+    <!-- 반려견 삭제 -->
+    <update id="deleteDog">
+        update dog
+        set dog_status = -1            
+        where dog_id = #{dogId}
+    </update>
+    
 </mapper>

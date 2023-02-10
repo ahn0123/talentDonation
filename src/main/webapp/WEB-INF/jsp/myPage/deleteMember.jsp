@@ -19,7 +19,7 @@
 </head>
 <body class="is-preload">
 <c:if test="${not empty sessionId}">
-    <form method="post" action="/myPage/deleteMember" id="deleteUserForm">
+    <form method="post" action="/myPage/deleteMember" id="deleteMemberForm">
         <div class="row gtr-uniform" style="text-align: center; width: 90%; float: right;">
             <div class="field" style="text-align: center;">
                 <label for="memId">아이디</label>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="field">
-                <button class="btn btn-success" type="button" value="회원탈퇴" id="deleteUser_btn">회원탈퇴</button>
+                <button class="btn btn-success" type="button" value="회원탈퇴" id="deleteMember_btn">회원탈퇴</button>
                 <button class="cancel btn btn-danger" type="button" onclick="window.close()">취소</button>
             </div>
             <div class="field" style="color:blue">${msg}</div>
@@ -63,18 +63,18 @@
 <script type="text/javascript">
 	 $(document).ready(function (e) {
 
-			$("#deleteUser_btn").click(function () {
-				const memPwd = $("#memPwd").val().replaceAll(" ", "");
-				
-								
-				if (!memPwd) {
-					alert("비밀번호를 입력하세요.");
-				} else {
-					$("#deleteUserForm").submit();
-				}
+		$("#deleteMember_btn").click(function () {
+			const memPwd = $("#memPwd").val().replaceAll(" ", "");
+			
+							
+			if (!memPwd) {
+				alert("비밀번호를 입력하세요");
+			} else {
+				$("#deleteMemberForm").submit();
+			}
 
-			});
-		})
+		});
+	})
 </script>	
 </body>
 </html>

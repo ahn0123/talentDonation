@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.talentDonation.dto.Criteria;
+import com.talentDonation.dto.Keyword;
 import com.talentDonation.dto.Member;
+import com.talentDonation.dto.Program;
 import com.talentDonation.dto.Trainer;
 
 @Mapper
@@ -21,4 +23,7 @@ public interface AdminMapper {
     public List<Member> getTrainerDetail(String memId); //트레이너정보 가져오기(Admin)
     void addTrainer(Trainer trainer); //트레이너 정보 추가 등록
     void modifyTrainerInfo(Trainer trainer);
+    public List<Trainer> getTrainerName(); //트레이너명 가져오기
+    public List<Keyword> getKeyName(); //키워드명 가져오기
+    void addProgram(Program program); //프로그램 추가
 }
