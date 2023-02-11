@@ -98,7 +98,7 @@
 		var dogId = document.getElementById('dogId').value;
 		
 		var param = {
-			dogId: dogId,		
+			dogId: dogId
 		};            
 		 
 		$.ajax({		

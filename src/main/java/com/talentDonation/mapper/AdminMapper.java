@@ -25,5 +25,11 @@ public interface AdminMapper {
     void modifyTrainerInfo(Trainer trainer);
     public List<Trainer> getTrainerName(); //트레이너명 가져오기
     public List<Keyword> getKeyName(); //키워드명 가져오기
+
     void addProgram(Program program); //프로그램 추가
+    public List<Program> getProgramList(Criteria cri); //프로그램 정보 가져오기
+    public int getProgramAdminTotal(Criteria cri); //프로그램 총 개수
+    public List<Program> getProgramDetail(int progId); //프로그램 정보 가져오기(Admin)
+    void modifyProgramInfo(Program program); //프로그램 정보 수정
+    void deleteProgram(Program program); //프로그램 삭제
 }

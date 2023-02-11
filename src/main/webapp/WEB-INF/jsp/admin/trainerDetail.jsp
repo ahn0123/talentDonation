@@ -12,6 +12,12 @@
     
 </head>
 <body class="is-preload">
+	<c:if test="${empty sessionId}">
+		<script>
+			alert("로그인을 진행해주세요");
+			location.href = "<%=request.getContextPath()%>/login";
+		</script>
+	</c:if>
 	<!-- Header -->
 	<%@include file ="../header.jsp" %>
 	<div id="main">
@@ -71,6 +77,7 @@
 								<li><input type="button" value="수정" class="button primary" id="editTrainer_btn"></li>
 								<li><input type="button" value="목록가기" class="button" onclick="location.href='trainerList'"></li>
 							</ul>
+							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" ></p>
 						</form>
 					</div>
 				</div> <!-- end of content -->

@@ -12,6 +12,12 @@
     
 </head>
 <body class="is-preload">
+	<c:if test="${empty sessionId}">
+		<script>
+			alert("로그인을 진행해주세요");
+			location.href = "<%=request.getContextPath()%>/login";
+		</script>
+	</c:if>
 	<!-- Header -->
 	<%@include file ="../header.jsp" %>
 	<div id="main">
@@ -23,7 +29,7 @@
 				<br>
 				<div class="content"> <!-- start of content -->
 				    <div class="form">
-						<form method="post" action="/memberDetail" modelAttribute="member">
+						<form method="post" action="/admin/memberDetail" modelAttribute="member">
 							<c:forEach var="list" items="${list}">
 							<div class="fields">
 								<div class="field">

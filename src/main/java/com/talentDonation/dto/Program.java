@@ -24,4 +24,10 @@ public class Program {
 	private Date progStartDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date progEndDate;
+
+	private String memName;
+
+	private String keyName;
+
+	private int rn;
 }

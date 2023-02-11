@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PTA TRAINERLIST</title>
+    <title>PTA PROGRAMLIST</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
@@ -24,7 +24,7 @@
 		<div class="wrapper">
 			<div class="inner5">
 				<header class="major">
-					<h2>트레이너목록</h2>
+					<h2>교육 목록</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -36,9 +36,9 @@
 							<td>					
 							<select name="type" class="se_type01" style="width:150px" >
 			                        <option value="" ${pageMaker.cri.type == null ? 'selected' : ''}>검색 기준</option>
-			                        <option value="I" ${pageMaker.cri.type == 'I' ? 'selected' : ''}>아이디</option>
-			                        <option value="N" ${pageMaker.cri.type == 'N' ? 'selected' : ''}>이름</option>
-			                        <option value="E" ${pageMaker.cri.type == 'E' ? 'selected' : ''}>이메일</option>
+			                        <option value="P" ${pageMaker.cri.type == 'P' ? 'selected' : ''}>교육과정명</option>
+			                        <option value="T" ${pageMaker.cri.type == 'T' ? 'selected' : ''}>트레이너명</option>
+			                        <option value="L" ${pageMaker.cri.type == 'L' ? 'selected' : ''}>장소</option>
 			                </select>       	
 				        	</td>
 				        	<td>
@@ -59,22 +59,18 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">번호</th>
-									<th style="text-align:center;">아이디</th>
-									<th style="text-align:center;">이름</th>
-									<th style="text-align:center;">연락처</th>
-									<th style="text-align:center;">이메일</th>
+									<th style="text-align:center;">교육과정명</th>
+									<th style="text-align:center;">트레이너명</th>
+									<th style="text-align:center;">장소</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="list" items="${list}">
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
-									<%-- <td style="text-align:left;">${list.member_id}</td> --%>
-									<%-- <td><a href="memberDetail?member_id=${list.member_id}" class="btn_link">${list.name}</a></td> --%>
-									<td style="text-align:center;">${list.memId}</td>
-									<td style="text-align:center;"><a href="trainerDetail?memId=${list.memId}">${list.memName}</a></td>
-									<td style="text-align:center;">${list.memTel}</td>
-									<td style="text-align:center;">${list.memEmail}</td>				
+									<td style="text-align:center;"><a href="programDetail?progId=${list.progId}">${list.progTitle}</a></td>
+									<td style="text-align:center;">${list.memName}</td>
+									<td style="text-align:center;">${list.progLocation}</td>			
 								</tr>
 								</c:forEach>
 							</tbody>
@@ -119,6 +115,10 @@
 		               
 					</form>
 					<!--//페이징 종료-->
+					<!-- 버튼영역 -->
+					<ul class="actions special">
+						<li><input type="button" value="등록" class="button primary" onclick="location.href='addProgram'"></li>
+					</ul>
 				</div> <!-- end of content -->
 
 			</div>
@@ -143,7 +143,7 @@ $(".changePage").on("click", function(e){
 	 
     e.preventDefault();
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));    
-    moveForm.attr("action", "/admin/trainerList")
+    moveForm.attr("action", "/admin/programList")
     moveForm.submit();
     
 });

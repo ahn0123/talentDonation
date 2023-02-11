@@ -100,4 +100,35 @@ public class AdminController {
    		return "admin/keyListPopup";
    	}
 
+   	// 전체 프로그램 정보 가져오기
+ 	@GetMapping("/programList")
+ 	public String programList(Model model, Criteria cri) {
+ 		model.addAttribute("list", adminMapper.getProgramList(cri)); //프로그램 정보 가져오기
+ 		int total = adminMapper.getProgramAdminTotal(cri); //프로그램 총 개수
+ 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+ 		model.addAttribute("pageMaker", pageMake);
+ 		return "admin/programList";
+ 	}
+
+ 	// 프로그램 정보 가져오기(Admin)
+ 	@GetMapping("/programDetail")
+ 	public String programDetail(Model model, @RequestParam("progId") int progId) {
+ 		model.addAttribute("list", adminMapper.getProgramDetail(progId)); //프로그램 정보 가져오기(Admin)
+ 		return "admin/programDetail";
+ 	}
+
+ 	// 프로그램 정보 수정
+   	@PostMapping("/modifyProgramInfo")
+   	public String modifyProgramInfo(@ModelAttribute Program program) {
+   		adminMapper.modifyProgramInfo(program);
+   		return "redirect:/admin/programList";
+   	}
+
+   	// 프로그램 삭제(ajax)
+    @PostMapping(path = "/deleteProgram", produces = "text/json; charset=utf-8")
+    public String deleteProgram(Model model, @ModelAttribute Program program) {
+    	adminMapper.deleteProgram(program);
+        return "redirect:/admin/programList";
+    }
+
 }

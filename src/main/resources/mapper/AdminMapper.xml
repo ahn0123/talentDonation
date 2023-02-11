@@ -100,7 +100,67 @@
     <!-- 프로그램 추가 -->
 	<insert id="addProgram">
         insert into program(prog_id, prog_trmem_id, prog_key_id, prog_title, prog_location, prog_price, prog_recruit_num, prog_content, prog_rsv_status, prog_status, prog_due, prog_start_date, prog_end_date)
-        values (prog_id.nextval, #{progTrmemId}, #{progKeyId}, #{progTitle}, #{progLocation}, #{progPrice}, #{progRecruitNum}, #{progContent}, #{progRsvStatus}, #{progStatus}, #{progDue}, #{progStartDate}, #{progEndDate})
+        values (prog_id.nextval, #{progTrmemId}, #{progKeyId}, #{progTitle}, #{progLocation}, #{progPrice}, #{progRecruitNum}, #{progContent}, 1, 0, #{progDue}, #{progStartDate}, #{progEndDate})
     </insert>
+    
+    <!-- 검색 조건문(프로그램 현황) -->
+    <sql id="criteria_program">
+        <if test="type != null and keyword != null">
+            <trim prefix="and" suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'P'.toString()">
+                                p.prog_title LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'T'.toString()">
+                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'L'.toString()">
+                                p.prog_location LIKE '%'|| #{keyword} ||'%'
+                            </when>                            
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+    <!-- 프로그램 정보 가져오기 -->
+    <select id="getProgramList" parameterType="list" resultType="com.talentDonation.dto.Program">
+        select * from (select rownum as rn, p.*, m.mem_name from program p join member m on p.prog_trmem_id = m.mem_id where prog_status in(0, 1)
+        <if test="keyword != null">
+           <include refid="criteria_program"></include>
+        </if>        
+        ) T1
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) 
+    </select>
+    
+    <!-- 프로그램 총 개수 -->
+    <select id="getProgramAdminTotal" resultType="int">
+        select count(*) from program
+        <if test="keyword != null">
+            <include refid="criteria_program"></include>
+        </if>
+    </select>
+    
+    <!-- 프로그램 정보 가져오기(Admin) -->
+    <select id="getProgramDetail" resultType="com.talentDonation.dto.Program">
+        select * from program p join member m on p.prog_trmem_id = m.mem_id join keyword k on p.prog_key_id=k.key_id where prog_id = #{progId}
+    </select>
+    
+    <!-- 프로그램 정보 수정 -->
+    <update id="modifyProgramInfo">
+        update program
+		set prog_title=#{progTitle}, prog_location=#{progLocation}, prog_price=#{progPrice}, prog_recruit_num=#{progRecruitNum}, prog_content=#{progContent}, prog_due=#{progDue}, prog_start_date=#{progStartDate}, prog_end_date=#{progEndDate}            
+		where prog_id = #{progId}
+    </update>
+    
+    <!-- 프로그램 삭제 -->
+    <update id="deleteProgram">
+        update program
+        set prog_status = -1            
+        where prog_id = #{progId}
+    </update>
     
 </mapper>
