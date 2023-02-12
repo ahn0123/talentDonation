@@ -42,7 +42,7 @@
 						</li>
 						<li><a href="<%=request.getContextPath()%>/program/programApplyList">교육과정</a></li>
 						<li>
-							<a href="<%=request.getContextPath()%>/myPage/myPageMember">마이페이지</a>
+							<a href="#" class="dropdown">마이페이지</a>
 							<ul>
 								<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">회원정보 수정</a></li>
 								<li><a href="#">신청현황</a></li>
@@ -53,12 +53,13 @@
 						<li><a href="#">교육후기</a></li>
 						<c:if test="${sessionId eq 'admin123'}">
 		                <li>
-		                	<a href="/admin/memberList" class="dropdown">관리자</a>
+		                	<a href="#" class="dropdown">관리자</a>
 		                	<ul>
-								<li><a href="/admin/memberList">회원목록</a></li>
-								<li><a href="/admin/trainerList">트레이너목록</a></li>
-								<li><a href="/admin/programList">교육목록</a></li>
-								<li><a href="#">키워드목록</a></li>
+		                		<li><a href="/admin/applyListAdmin">교육신청 관리</a></li>
+								<li><a href="/admin/memberList">회원목록 관리</a></li>
+								<li><a href="/admin/trainerList">트레이너목록 관리</a></li>
+								<li><a href="/admin/programList">교육목록 관리</a></li>
+								<li><a href="#">키워드목록 관리</a></li>
 								<li>
 									<a href="#">Submenu</a>
 									<ul>

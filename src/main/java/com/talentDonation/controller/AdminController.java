@@ -131,4 +131,14 @@ public class AdminController {
         return "redirect:/admin/programList";
     }
 
+    // 전체 신청 정보 가져오기
+  	@GetMapping("/applyListAdmin")
+  	public String applyListAdmin(Model model, Criteria cri) {
+  		model.addAttribute("list", adminMapper.getApplyListAdmin(cri)); //신청 정보 가져오기
+  		int total = adminMapper.getApplyAdminTotal(cri); //신청 총 개수
+  		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+  		model.addAttribute("pageMaker", pageMake);
+  		return "admin/applyListAdmin";
+  	}
+
 }

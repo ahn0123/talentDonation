@@ -163,4 +163,45 @@
         where prog_id = #{progId}
     </update>
     
+    <!-- 검색 조건문(전체 교육신청 현황) -->
+    <sql id="criteria_apply">
+        <if test="type != null and keyword != null">
+            <trim prefix="where" suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'N'.toString()">
+                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'T'.toString()">
+                                m.mem_tel LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'P'.toString()">
+                                p.prog_title LIKE '%'|| #{keyword} ||'%'
+                            </when>                            
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+    <!-- 신청 정보 가져오기 -->
+    <select id="getApplyListAdmin" parameterType="list" resultType="com.talentDonation.dto.Apply">
+        select * from (select rownum as rn, a.*, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join member m on p.prog_trmem_id = m.mem_id
+        <if test="keyword != null">
+           <include refid="criteria_apply"></include>
+        </if>        
+        ) T1
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) 
+    </select>
+    
+    <!-- 신청 총 개수 -->
+    <select id="getApplyAdminTotal" resultType="int">
+        select count(*) from (select rownum as rn, a.*, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join member m on p.prog_trmem_id = m.mem_id)
+        <if test="keyword != null">
+            <include refid="criteria_apply"></include>
+        </if>
+    </select>
+    
 </mapper>

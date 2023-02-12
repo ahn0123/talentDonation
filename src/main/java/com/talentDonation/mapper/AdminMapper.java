@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.talentDonation.dto.Apply;
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.Keyword;
 import com.talentDonation.dto.Member;
@@ -32,4 +33,7 @@ public interface AdminMapper {
     public List<Program> getProgramDetail(int progId); //프로그램 정보 가져오기(Admin)
     void modifyProgramInfo(Program program); //프로그램 정보 수정
     void deleteProgram(Program program); //프로그램 삭제
+
+    public List<Apply> getApplyListAdmin(Criteria cri); //신청 정보 가져오기
+    public int getApplyAdminTotal(Criteria cri); //신청 총 개수
 }
