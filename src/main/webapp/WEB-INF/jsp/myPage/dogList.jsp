@@ -29,8 +29,8 @@
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
-					<!-- Table -->
-					
+				
+					<!-- Table -->					
 					<div class="table-wrapper">
 						<table>
 							<thead>
@@ -53,6 +53,7 @@
 							</tbody>
 						</table>
 					</div> <!-- end of Table -->
+					
 					<!-- 버튼영역 -->
 					<ul class="actions special">
 						<li><input type="button" value="등록" class="button primary" onclick="location.href='addDog'"></li>

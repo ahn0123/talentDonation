@@ -40,9 +40,9 @@
 								</li>
 							</ul>
 						</li>
-						<li><a href="generic.html">교육과정</a></li>
+						<li><a href="<%=request.getContextPath()%>/program/programApplyList">교육과정</a></li>
 						<li>
-							<a href="myPage/myPageMember">마이페이지</a>
+							<a href="<%=request.getContextPath()%>/myPage/myPageMember">마이페이지</a>
 							<ul>
 								<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">회원정보 수정</a></li>
 								<li><a href="#">신청현황</a></li>

@@ -31,7 +31,7 @@
 						</li>
 					</ul>
 				</li>
-				<li><a href="generic.jsp">교육과정</a></li>
+				<li><a href="<%=request.getContextPath()%>/program/programApplyList">교육과정</a></li>
 				<li>
 					<a href="<%=request.getContextPath()%>/myPage/myPageMember">마이페이지</a>
 					<ul>

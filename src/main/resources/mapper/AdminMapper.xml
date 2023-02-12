@@ -138,7 +138,7 @@
     
     <!-- 프로그램 총 개수 -->
     <select id="getProgramAdminTotal" resultType="int">
-        select count(*) from program
+        select count(*) from program p join member m on p.prog_trmem_id = m.mem_id where 1=1
         <if test="keyword != null">
             <include refid="criteria_program"></include>
         </if>
