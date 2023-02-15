@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.PageMakerDTO;
@@ -54,9 +55,24 @@ public class ProgramController {
 
    	// 프로그램 신청하기
    	@PostMapping("/addApply")
-   	public String addApply(@RequestParam("progId") int progId, @RequestParam("dogId") int dogId) {
-   		programMapper.addApply(progId, dogId);
-   		return "redirect:/";
+	public String addApply(Model model, @RequestParam("progId") int progId, @RequestParam("dogId") int dogId,
+			RedirectAttributes re, HttpSession session) {
+
+		String memId = (String) session.getAttribute("sessionId");
+
+   		int cnt = programMapper.getApplyCount(progId, dogId); //프로그램 신청 중복 방지(count)
+   		log.info("cnt:"+cnt);
+   		if(cnt == 1) {
+			re.addAttribute("progId", progId);
+			re.addAttribute("memId", memId);
+			re.addFlashAttribute("message", "이미 등록된 신청정보입니다");
+			return "redirect:/program/addApply";
+
+   		} else {
+   			programMapper.addApply(progId, dogId);
+   			return "redirect:/";
+   		}
+
    	}
 
    	// 반려견 리스트 팝업

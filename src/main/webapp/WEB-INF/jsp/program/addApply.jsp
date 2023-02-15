@@ -9,7 +9,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
 	<meta name="keywords" content="" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />    
+
+<script>
+var isMessage = true;
+<c:if test="${!empty message}">
+if(isMessage){
+	 alert("${message}");
+	 isMessage = false;
+}
+</c:if>
+</script> 
     
 </head>
 <body class="is-preload">
@@ -68,7 +78,7 @@
 								<li><input type="button" value="등록" class="button primary" id="addApply_btn"></li>
 							</ul>
 							</c:forEach>
-							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" ></p>
+							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" >${msg}</p>
 						</form>
 					</div>
 				</div> <!-- end of content -->

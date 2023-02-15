@@ -73,7 +73,7 @@
 									<td style="text-align:center;">${list.rn}</td>
 									<td style="text-align:center;">${list.memName}</td>
 									<td style="text-align:center;">${list.memTel}</td>
-									<td style="text-align:center;"><a href="applyDetailAdmin?progId=${list.progId}&memId=${list.dogId}">${list.progTitle}</a></td>
+									<td style="text-align:center;"><a href="applyDetailAdmin?applyProgId=${list.applyProgId}&applyDogId=${list.applyDogId}&memId=${list.memId}">${list.progTitle}</a></td>
 									<c:if test="${list.applyStatus == 0}">
 									<td style="text-align:center;">대기</td>
 									</c:if>

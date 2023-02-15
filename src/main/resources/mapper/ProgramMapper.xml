@@ -6,5 +6,10 @@
     <insert id="addApply">
     	insert into apply values(#{dogId}, #{progId}, 0, sysdate)
     </insert>
+    
+    <!-- 프로그램 신청 중복 방지(count) -->
+    <select id="getApplyCount" resultType="int">
+        select count(*) from apply where apply_dog_id=#{dogId} and apply_prog_id=#{progId} and apply_status = 0
+    </select>
 	
 </mapper>

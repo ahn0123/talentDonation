@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.talentDonation.dto.Apply;
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.PageMakerDTO;
 import com.talentDonation.dto.Program;
@@ -35,10 +36,10 @@ public class AdminController {
 		return "admin/memberList";
 	}
 
-	// 회원정보 가져오기(Admin)
+	// 회원정보 상세보기(Admin)
 	@GetMapping("/memberDetail")
 	public String memberDetail(Model model, @RequestParam("memId") String memId) {
-		model.addAttribute("list", adminMapper.getMemberDetail(memId)); //회원정보 가져오기(Admin)
+		model.addAttribute("list", adminMapper.getMemberDetail(memId)); //회원정보 상세보기(Admin)
 		return "admin/memberDetail";
 	}
 
@@ -52,10 +53,10 @@ public class AdminController {
 		return "admin/trainerList";
 	}
 
-	// 트레이너정보 가져오기(Admin)
+	// 트레이너정보 상세보기(Admin)
 	@GetMapping("/trainerDetail")
 	public String trainerDetail(Model model, @RequestParam("memId") String memId) {
-		model.addAttribute("list", adminMapper.getTrainerDetail(memId)); //트레이너정보 가져오기(Admin)
+		model.addAttribute("list", adminMapper.getTrainerDetail(memId)); //트레이너정보 상세보기(Admin)
 		return "admin/trainerDetail";
 	}
 
@@ -110,10 +111,10 @@ public class AdminController {
  		return "admin/programList";
  	}
 
- 	// 프로그램 정보 가져오기(Admin)
+ 	// 프로그램 정보 상세보기(Admin)
  	@GetMapping("/programDetail")
  	public String programDetail(Model model, @RequestParam("progId") int progId) {
- 		model.addAttribute("list", adminMapper.getProgramDetail(progId)); //프로그램 정보 가져오기(Admin)
+ 		model.addAttribute("list", adminMapper.getProgramDetail(progId)); //프로그램 정보 상세보기(Admin)
  		return "admin/programDetail";
  	}
 
@@ -140,5 +141,19 @@ public class AdminController {
   		model.addAttribute("pageMaker", pageMake);
   		return "admin/applyListAdmin";
   	}
+
+  	// 신청 정보 상세보기(Admin)
+ 	@GetMapping("/applyDetailAdmin")
+ 	public String applyDetailAdmin(Model model, @RequestParam("applyProgId") int applyProgId, @RequestParam("applyDogId") int applyDogId, @RequestParam("memId") String memId) {
+ 		model.addAttribute("list", adminMapper.getApplyDetailAdmin(applyProgId, applyDogId, memId)); //신청 정보 가져오기(Admin)
+ 		return "admin/applyDetailAdmin";
+ 	}
+
+ 	// 신청 정보 상태값 수정(ajax)
+    @PostMapping(path = "/modifyApplyStatus", produces = "text/json; charset=utf-8")
+    public String modifyApplyStatus(Model model, @ModelAttribute Apply apply) {
+    	adminMapper.modifyApplyStatus(apply);
+        return "redirect:/admin/applyListAdmin";
+    }
 
 }

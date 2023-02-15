@@ -44,7 +44,7 @@
         </if>
     </select>
     
-    <!-- 회원정보 가져오기(Admin) -->
+    <!-- 회원정보 상세보기(Admin) -->
     <select id="getMemberDetail" resultType="com.talentDonation.dto.Member">
         select * from member where mem_id= #{memId}
     </select>
@@ -69,7 +69,7 @@
         </if>
     </select>
     
-    <!-- 트레이너정보 가져오기(Admin) -->
+    <!-- 트레이너정보 상세보기(Admin) -->
     <select id="getTrainerDetail" resultType="com.talentDonation.dto.Member">
         select * from member m left join trainer t on m.mem_id = t.tr_mem_id where m.mem_id = #{memId}
     </select>
@@ -144,7 +144,7 @@
         </if>
     </select>
     
-    <!-- 프로그램 정보 가져오기(Admin) -->
+    <!-- 프로그램 정보 상세보기(Admin) -->
     <select id="getProgramDetail" resultType="com.talentDonation.dto.Program">
         select * from program p join member m on p.prog_trmem_id = m.mem_id join keyword k on p.prog_key_id=k.key_id where prog_id = #{progId}
     </select>
@@ -188,20 +188,35 @@
     
     <!-- 신청 정보 가져오기 -->
     <select id="getApplyListAdmin" parameterType="list" resultType="com.talentDonation.dto.Apply">
-        select * from (select rownum as rn, a.*, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join member m on p.prog_trmem_id = m.mem_id
+        select * from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
         <if test="keyword != null">
            <include refid="criteria_apply"></include>
         </if>        
         ) T1
-        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) 
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})
+        order by apply_date desc
     </select>
     
     <!-- 신청 총 개수 -->
     <select id="getApplyAdminTotal" resultType="int">
-        select count(*) from (select rownum as rn, a.*, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join member m on p.prog_trmem_id = m.mem_id)
+        select count(*) from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id)
         <if test="keyword != null">
             <include refid="criteria_apply"></include>
         </if>
     </select>
+    
+    <!-- 신청 정보 상세보기(Admin) -->
+    <select id="getApplyDetailAdmin" resultType="com.talentDonation.dto.Apply">
+        select m.mem_name, m.mem_tel, d.dog_name, d.dog_breed, d.dog_birthday, p.prog_title, a.* 
+		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id 
+		where p.prog_id=#{applyProgId} and d.dog_id=#{applyDogId} and m.mem_id=#{memId}
+    </select>
+    
+    <!-- 신청 정보 상태값 수정 -->
+    <update id="modifyApplyStatus">
+        update apply 
+        set apply_status=#{applyStatus}
+        where apply_dog_id=#{applyDogId} and apply_prog_id=#{applyProgId}
+    </update>
     
 </mapper>
