@@ -38,4 +38,73 @@
         where dog_id = #{dogId}
     </update>
     
+    <!-- 검색 조건문(교육신청 현황) -->
+    <sql id="criteria_applyMember">
+        <if test="type != null and keyword != null">
+            <trim prefix="and" suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'P'.toString()">
+                                p.prog_title LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'T'.toString()">
+                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'D'.toString()">
+                                d.dog_name LIKE '%'|| #{keyword} ||'%'
+                            </when>                            
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+    <!-- 신청현황 정보 가져오기(일반회원) -->
+    <select id="getApplyListMember" parameterType="list" resultType="com.talentDonation.dto.Apply">
+        select * from (select rownum as rn, p.prog_title, m.mem_name, d.dog_name, p.prog_location, a.* 
+		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on p.prog_trmem_id = m.mem_id 
+		where d.dog_mem_id = #{memId}
+       <!--  <if test="keyword != null">
+           <include refid="criteria_applyMember"></include>
+        </if>   -->      
+        ) T1
+        <!-- where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) -->
+        order by apply_date desc
+    </select>
+    
+    <!-- 신청현황 총 개수(일반회원) -->
+    <select id="getApplyMemberTotal" resultType="int">
+        select count(*) from (select rownum as rn, p.prog_title, m.mem_name, d.dog_name, p.prog_location, a.* 
+		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on p.prog_trmem_id = m.mem_id) 
+		where d.dog_mem_id = #{memId}
+        <!-- <if test="keyword != null">
+            <include refid="criteria_applyMember"></include>
+        </if> -->
+    </select>
+    
+    <!-- 신청현황 정보 가져오기(트레이너) -->
+    <select id="getApplyListTrainer" parameterType="list" resultType="com.talentDonation.dto.Apply">
+        select * from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id,d.dog_name, p.prog_location 
+ 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
+ 		where prog_trmem_id = #{memId}
+       <!--  <if test="keyword != null">
+           <include refid="criteria_applyMember"></include>
+        </if>   -->      
+        ) T1
+        <!-- where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) -->
+        order by apply_date desc
+    </select>
+    
+    <!-- 신청현황 총 개수(일반회원) -->
+    <select id="getApplyTrainerTotal" resultType="int">
+        select count(*) from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id, d.dog_name, p.prog_location 
+ 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id)
+ 		where prog_trmem_id = #{memId}
+        <!-- <if test="keyword != null">
+            <include refid="criteria_applyMember"></include>
+        </if> -->
+    </select>
+    
 </mapper>

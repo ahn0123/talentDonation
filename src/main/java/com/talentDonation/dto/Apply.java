@@ -25,5 +25,8 @@ public class Apply {
 	private String memName;
 	private String memTel;
 
+	private String progTrmemId;
 	private String progTitle;
+	private String progLocation;
+
 }

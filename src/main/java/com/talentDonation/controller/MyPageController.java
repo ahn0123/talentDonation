@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.Dog;
 import com.talentDonation.dto.Member;
 import com.talentDonation.mapper.MyPageMapper;
@@ -139,4 +140,28 @@ public class MyPageController {
         myPageMapper.deleteDog(dog);
         return "redirect:/myPage/dogList";
     }
+
+    // 신청현황 정보 가져오기
+   	@GetMapping("/applyListMember")
+   	public String applyListMember(Model model, Criteria cri, HttpSession session) {
+   		String memId = (String) session.getAttribute("sessionId");
+   		//log.info("memId:"+memId);
+   		model.addAttribute("list", myPageMapper.getApplyListMember(memId)); //신청 현황 정보 가져오기
+   		//int total = myPageMapper.getApplyMemberTotal(memId); //신청현황 총 개수
+   		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+   		//model.addAttribute("pageMaker", pageMake);
+   		return "myPage/applyListMember";
+   	}
+
+   	// 신청현황 정보 가져오기(트레이너)
+   	@GetMapping("/applyListTrainer")
+   	public String applyListTrainer(Model model, Criteria cri, HttpSession session) {
+   		String memId = (String) session.getAttribute("sessionId");
+   		//log.info("memId:"+memId);
+   		model.addAttribute("list", myPageMapper.getApplyListTrainer(memId)); //신청 현황 정보 가져오기(트레이너)
+   		//int total = myPageMapper.getApplyTrainerTotal(memId); //신청현황 총 개수(트레이너)
+   		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+   		//model.addAttribute("pageMaker", pageMake);
+   		return "myPage/applyListTrainer";
+   	}
 }

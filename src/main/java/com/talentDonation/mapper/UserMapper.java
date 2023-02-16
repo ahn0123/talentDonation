@@ -20,5 +20,6 @@ public interface UserMapper {
 	int checkId(String memId); //아이디 중복 체크
 
 	Member getMember(String memId); // memId로 해당 멤버 정보 모두 가져오기
+
 	public void deleteMember(String memId); // 회원탈퇴
 }

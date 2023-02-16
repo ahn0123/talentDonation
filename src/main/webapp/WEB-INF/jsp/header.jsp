@@ -36,7 +36,15 @@
 					<a href="#" class="dropdown">마이페이지</a>
 					<ul>
 						<li><a href="<%=request.getContextPath()%>/myPage/myPageMember">회원정보 수정</a></li>
-						<li><a href="#">신청현황</a></li>
+						
+						<%-- <c:if test="${list.memType == 1}"> --%>
+						<li><a href="<%=request.getContextPath()%>/myPage/applyListMember">신청현황</a></li>
+						<%-- </c:if> --%>
+						
+						<%-- <c:if test="${memType == 2}"> --%>
+						<li><a href="<%=request.getContextPath()%>/myPage/applyListTrainer">신청현황(트레이너)</a></li>
+						<%-- </c:if> --%>
+					
 						<li><a href="#">교육일지</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/dogList">반려견 정보</a></li>
 					</ul>

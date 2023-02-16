@@ -188,7 +188,7 @@
     
     <!-- 신청 정보 가져오기 -->
     <select id="getApplyListAdmin" parameterType="list" resultType="com.talentDonation.dto.Apply">
-        select * from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
+        select * from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
         <if test="keyword != null">
            <include refid="criteria_apply"></include>
         </if>        
@@ -199,7 +199,7 @@
     
     <!-- 신청 총 개수 -->
     <select id="getApplyAdminTotal" resultType="int">
-        select count(*) from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id)
+        select count(*) from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id)
         <if test="keyword != null">
             <include refid="criteria_apply"></include>
         </if>
