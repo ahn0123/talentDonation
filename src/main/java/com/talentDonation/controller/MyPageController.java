@@ -141,11 +141,12 @@ public class MyPageController {
         return "redirect:/myPage/dogList";
     }
 
-    // 신청현황 정보 가져오기
+    // 신청현황 정보 가져오기(일반회원)
    	@GetMapping("/applyListMember")
    	public String applyListMember(Model model, Criteria cri, HttpSession session) {
    		String memId = (String) session.getAttribute("sessionId");
    		//log.info("memId:"+memId);
+   		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
    		model.addAttribute("list", myPageMapper.getApplyListMember(memId)); //신청 현황 정보 가져오기
    		//int total = myPageMapper.getApplyMemberTotal(memId); //신청현황 총 개수
    		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
@@ -153,11 +154,19 @@ public class MyPageController {
    		return "myPage/applyListMember";
    	}
 
+   	// 신청 정보 상세보기 팝업(일반회원)
+  	@GetMapping("/applyDetailMember")
+  	public String applyDetailMember(Model model, @RequestParam("applyProgId") int applyProgId, @RequestParam("applyDogId") int applyDogId, @RequestParam("memId") String memId) {
+  		model.addAttribute("list", myPageMapper.getApplyDetailMember(applyProgId, applyDogId, memId)); //신청 정보 상세보기(일반회원)
+  		return "myPage/applyDetailMember";
+  	}
+
    	// 신청현황 정보 가져오기(트레이너)
    	@GetMapping("/applyListTrainer")
    	public String applyListTrainer(Model model, Criteria cri, HttpSession session) {
    		String memId = (String) session.getAttribute("sessionId");
    		//log.info("memId:"+memId);
+   		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
    		model.addAttribute("list", myPageMapper.getApplyListTrainer(memId)); //신청 현황 정보 가져오기(트레이너)
    		//int total = myPageMapper.getApplyTrainerTotal(memId); //신청현황 총 개수(트레이너)
    		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);

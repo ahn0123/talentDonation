@@ -74,7 +74,7 @@
 								<c:forEach var="list" items="${list}">
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
-									<td style="text-align:center;">${list.progTitle}</td>
+									<td style="text-align:center;"><a href="applyDetailMember?applyProgId=${list.applyProgId}&applyDogId=${list.applyDogId}&memId=${list.dogMemId}" onclick="window.open(this.href,'Detail','width=500px, height=400px, top=200, left=570, toolbar=no, scrollbars=no, resizable=yes');return false;" target="_blank">${list.progTitle}</a></td>
 									<td style="text-align:center;">${list.memName}</td>
 									<td style="text-align:center;">${list.dogName}</td>
 									<td style="text-align:center;">${list.progLocation}</td>

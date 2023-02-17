@@ -63,14 +63,14 @@
     
     <!-- 신청현황 정보 가져오기(일반회원) -->
     <select id="getApplyListMember" parameterType="list" resultType="com.talentDonation.dto.Apply">
-        select * from (select rownum as rn, p.prog_title, m.mem_name, d.dog_name, p.prog_location, a.* 
+       select * from (select A.* from (select rownum as rn, p.prog_title, m.mem_name, (select mem_type from member where mem_id = d.dog_mem_id) mem_type, d.dog_name, d.dog_mem_id, p.prog_location, a.* 
 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on p.prog_trmem_id = m.mem_id 
-		where d.dog_mem_id = #{memId}
-       <!--  <if test="keyword != null">
+		<!-- <if test="keyword != null">
            <include refid="criteria_applyMember"></include>
-        </if>   -->      
-        ) T1
-        <!-- where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) -->
+        </if>   -->       
+        ) A
+        <!-- where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) -->) B
+        where dog_mem_id = #{memId}
         order by apply_date desc
     </select>
     
@@ -82,6 +82,13 @@
         <!-- <if test="keyword != null">
             <include refid="criteria_applyMember"></include>
         </if> -->
+    </select>
+    
+    <!-- 신청 정보 상세보기(일반회원) -->
+    <select id="getApplyDetailMember" resultType="com.talentDonation.dto.Apply">
+        select m.mem_name, m.mem_tel, d.dog_name, d.dog_breed, d.dog_birthday, p.prog_price, p.prog_title, a.* 
+		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id 
+		where p.prog_id=#{applyProgId} and d.dog_id=#{applyDogId} and m.mem_id=#{memId}
     </select>
     
     <!-- 신청현황 정보 가져오기(트레이너) -->

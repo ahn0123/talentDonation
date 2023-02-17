@@ -41,14 +41,14 @@ public class HomeController {
 	@GetMapping("/")
     public String main(Model model, HttpSession session) {
 		String memId = (String) session.getAttribute("sessionId");
-		model.addAttribute("list", userMapper.getMember(memId)); //회원 유형 가져오기
+		model.addAttribute("list2", userMapper.getMember(memId)); //회원 유형 가져오기
         return "index";
     }
 
 	@GetMapping("index")
 	public String index(Model model, HttpSession session) {
 		String memId = (String) session.getAttribute("sessionId");
-		model.addAttribute("list", userMapper.getMember(memId)); //회원 유형 가져오기
+		model.addAttribute("list2", userMapper.getMember(memId)); //회원 유형 가져오기
 		return "index";
 	}
 

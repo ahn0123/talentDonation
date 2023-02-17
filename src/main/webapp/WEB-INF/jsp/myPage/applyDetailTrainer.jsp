@@ -25,7 +25,7 @@
 		<div class="wrapper">
 			<div class="inner3">
 				<header class="major">
-					<h2>교육신청 상세정보</h2>
+					<h2>교육신청 상세정보(트레이너)</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -42,6 +42,10 @@
 									<input name="memTel" id="memTel" type="text" value="${list.memTel}" readonly />
 								</div>
 								<div class="field">
+									<label style="text-align: left; color:cornflowerblue">이메일</label>
+									<input name="memEmail" id="memEmail" type="text" value="${list.memEmail}" readonly />
+								</div>
+								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">반려견명</label>
 									<input name="dogName" id="dogName" type="text" value="${list.dogName}" readonly />
 								</div>
@@ -55,12 +59,16 @@
 									<input name="dogBirthday" id="dogBirthday" type="text" value="${dogBirthday}" readonly />
 								</div>
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">교육과정</label>
-									<input name="memTel" id="memTel" type="text" value="${list.progTitle}" readonly />
+									<label style="text-align: left; color:cornflowerblue">반려견 무게</label>
+									<input name="dogWeight" id="dogWeight" type="text" value="${list.dogWeight}" readonly />
 								</div>
 								<div class="field">
+									<label style="text-align: left; color:cornflowerblue">반려견 비고</label>
+									<input name="dogRemark" id="dogRemark" type="text" value="${list.dogRemark}" readonly />
+								</div>
+								<!-- <div class="field">
 									<label style="text-align: left; color:cornflowerblue">처리상태</label>
-									<!-- Select영역 -->
+									Select영역
 									<select name="applyStatus" id="applyStatus">
 										<option value="" selected disabled>- 선택 -</option>
 										<option value="0">대기</option>
@@ -68,15 +76,14 @@
 										<option value="-1">반려</option>
 										<option value="-2">취소</option>
 									</select>
-								</div>
-								<input type="hidden" id="applyProgId" name="applyProgId" value="${list.applyProgId}">
-								<input type="hidden" id="applyDogId" name="applyDogId" value="${list.applyDogId}">
+								</div> -->
+								<%-- <input type="hidden" id="applyProgId" name="applyProgId" value="${list.applyProgId}">
+								<input type="hidden" id="applyDogId" name="applyDogId" value="${list.applyDogId}"> --%>
 							</div>
 							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
-								<li><input type="button" value="수정" class="button primary" id="editApply_btn"></li>
-								<li><input type="button" value="목록가기" class="button" onclick="location.href='applyListAdmin'"></li>
+								<li><input type="button" value="목록가기" class="button" onclick="location.href='applyListTrainer'"></li>
 							</ul>
 						</form>
 					</div>
@@ -96,36 +103,6 @@
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
-
-<script>
-	//ajax (신청 정보 상태값 수정)
-	$("#editApply_btn").click(function (){
-		var applyStatus = document.getElementById('applyStatus').value;
-		var applyProgId = document.getElementById('applyProgId').value;
-		var applyDogId = document.getElementById('applyDogId').value;
-		
-		var param = {
-			applyStatus: applyStatus,
-			applyProgId: applyProgId,
-			applyDogId: applyDogId
-		};            
-		 
-		$.ajax({		
-			type : "post",
-			data : param,
-			url : "/admin/modifyApplyStatus",
-			 
-			success : function(result) {
-				alert("성공적으로 수정되었습니다");	
-				location.href = "/admin/applyListAdmin";
-			},		
-			error : function(result) {
-				alert("오류가 발생했습니다");	
-			}
-		});
-		
-	});
-</script>
 
 </body>
 </html>

@@ -16,15 +16,18 @@ public class Apply {
 
 	private int rn;
 
+	private String dogMemId;
 	private String dogName;
 	private String dogBreed;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dogBirthday;
 
+	private int memType;
 	private String memId;
 	private String memName;
 	private String memTel;
 
+	private String progPrice;
 	private String progTrmemId;
 	private String progTitle;
 	private String progLocation;
