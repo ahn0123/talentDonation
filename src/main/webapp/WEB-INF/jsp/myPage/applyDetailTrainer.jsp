@@ -66,24 +66,11 @@
 									<label style="text-align: left; color:cornflowerblue">반려견 비고</label>
 									<input name="dogRemark" id="dogRemark" type="text" value="${list.dogRemark}" readonly />
 								</div>
-								<!-- <div class="field">
-									<label style="text-align: left; color:cornflowerblue">처리상태</label>
-									Select영역
-									<select name="applyStatus" id="applyStatus">
-										<option value="" selected disabled>- 선택 -</option>
-										<option value="0">대기</option>
-										<option value="1">승인</option>
-										<option value="-1">반려</option>
-										<option value="-2">취소</option>
-									</select>
-								</div> -->
-								<%-- <input type="hidden" id="applyProgId" name="applyProgId" value="${list.applyProgId}">
-								<input type="hidden" id="applyDogId" name="applyDogId" value="${list.applyDogId}"> --%>
 							</div>
 							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
-								<li><input type="button" value="목록가기" class="button" onclick="location.href='applyListTrainer'"></li>
+								<li><input type="button" value="닫기" class="button" onclick="window.close()"></li>
 							</ul>
 						</form>
 					</div>

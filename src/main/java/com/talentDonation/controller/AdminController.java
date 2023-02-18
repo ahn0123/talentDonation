@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.talentDonation.dto.Apply;
 import com.talentDonation.dto.Criteria;
+import com.talentDonation.dto.Keyword;
 import com.talentDonation.dto.PageMakerDTO;
 import com.talentDonation.dto.Program;
 import com.talentDonation.dto.Trainer;
 import com.talentDonation.mapper.AdminMapper;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 @RequestMapping("/admin/*")
 public class AdminController {
 
@@ -155,5 +157,56 @@ public class AdminController {
     	adminMapper.modifyApplyStatus(apply);
         return "redirect:/admin/applyListAdmin";
     }
+
+    // 전체 키워드 정보 가져오기
+   	@GetMapping("/keywordList")
+   	public String keywordList(Model model, Criteria cri) {
+   		model.addAttribute("list", adminMapper.getKeywordList(cri)); //키워드 정보 가져오기
+   		int total = adminMapper.getKeywordTotal(cri); //키워드 총 개수
+   		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+   		model.addAttribute("pageMaker", pageMake);
+   		return "admin/keywordList";
+   	}
+
+   	// 키워드 등록 페이지로 이동
+    @GetMapping("/addKeyword")
+    public String addKeyword(Model model) {
+        return  "admin/addKeyword";
+    }
+
+    // 키워드 등록 페이지
+    @PostMapping("/addKeyword")
+    public String addKeyword(Model model, @ModelAttribute Keyword keyword) {
+    	adminMapper.addKeyword(keyword);
+        return "admin/addKeyword";
+    }
+
+    // 키워드id 중복확인
+    @GetMapping("/checkKeyId")
+    @ResponseBody
+    public String checkKeyId(@RequestParam int id){
+        int result = adminMapper.checkKeyId(id); //키워드ID 중복 체크
+        log.info("result:" + result);
+        if (result == 0) {
+            return "success";
+        }
+        else {
+            return "fail";
+        }
+    }
+
+    // 키워드 정보 상세보기(Admin)
+  	@GetMapping("/keywordDetail")
+  	public String keywordDetail(Model model, @RequestParam("keyId") int keyId) {
+  		model.addAttribute("list", adminMapper.getKeywordDetail(keyId)); //키워드 정보 상세보기(Admin)
+  		return "admin/keywordDetail";
+  	}
+
+  	// 키워드 정보 수정(ajax)
+   	@PostMapping(path = "/modifyKeywordInfo", produces = "text/json; charset=utf-8")
+   	public String modifyKeywordInfo(@ModelAttribute Keyword keyword) {
+   		adminMapper.modifyKeywordInfo(keyword);
+   		return "redirect:/admin/keywordList";
+   	}
 
 }

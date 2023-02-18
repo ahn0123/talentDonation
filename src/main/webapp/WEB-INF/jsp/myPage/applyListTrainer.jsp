@@ -74,7 +74,7 @@
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
 									<td style="text-align:center;">${list.progTitle}</td>
-									<td style="text-align:center;">${list.memName}</td>
+									<td style="text-align:center;"><a href="applyDetailTrainer?applyProgId=${list.applyProgId}&applyDogId=${list.applyDogId}" onclick="window.open(this.href,'Detail','width=500px, height=400px, top=200, left=570, toolbar=no, scrollbars=no, resizable=yes');return false;" target="_blank">${list.memName}</a></td>
 									<td style="text-align:center;">${list.dogName}</td>
 									<td style="text-align:center;">${list.progLocation}</td>
 									<td style="text-align:center;"><fmt:formatDate var="applyDate" value="${list.applyDate}" pattern="yyyy-MM-dd"/>${applyDate}</td>

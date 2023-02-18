@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PTA APPLYLISTMEMBER</title>
+    <title>PTA KEYWORDLIST</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
@@ -25,7 +24,7 @@
 		<div class="wrapper">
 			<div class="inner5">
 				<header class="major">
-					<h2>교육신청 현황</h2>
+					<h2>키워드 목록</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -37,9 +36,8 @@
 							<td>					
 							<select name="type" class="se_type01" style="width:150px" >
 			                        <option value="" ${pageMaker.cri.type == null ? 'selected' : ''}>검색 기준</option>
-			                        <option value="P" ${pageMaker.cri.type == 'P' ? 'selected' : ''}>교육과정</option>
-			                        <option value="T" ${pageMaker.cri.type == 'T' ? 'selected' : ''}>트레이너명</option>
-			                        <option value="D" ${pageMaker.cri.type == 'D' ? 'selected' : ''}>반려견명</option>
+			                        <option value="I" ${pageMaker.cri.type == 'I' ? 'selected' : ''}>키워드ID</option>
+			                        <option value="N" ${pageMaker.cri.type == 'N' ? 'selected' : ''}>키워드명</option>
 			                </select>       	
 				        	</td>
 				        	<td>
@@ -60,44 +58,25 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">번호</th>
-									<th style="text-align:center;">교육과정</th>
-									<th style="text-align:center;">트레이너명</th>
-									<th style="text-align:center;">반려견명</th>
-									<th style="text-align:center;">장소</th>
-									<th style="text-align:center;">신청일자</th>
-									<th style="text-align:center;">처리상태</th>
-									<th style="text-align:center;">후기</th>
-									<th style="text-align:center;">교육일지</th>
+									<th style="text-align:center;">키워드ID</th>
+									<th style="text-align:center;">키워드명</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="list" items="${list}">
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
-									<td style="text-align:center;"><a href="applyDetailMember?applyProgId=${list.applyProgId}&applyDogId=${list.applyDogId}" onclick="window.open(this.href,'Detail','width=500px, height=400px, top=200, left=570, toolbar=no, scrollbars=no, resizable=yes');return false;" target="_blank">${list.progTitle}</a></td>
-									<td style="text-align:center;">${list.memName}</td>
-									<td style="text-align:center;">${list.dogName}</td>
-									<td style="text-align:center;">${list.progLocation}</td>
-									<td style="text-align:center;"><fmt:formatDate var="applyDate" value="${list.applyDate}" pattern="yyyy-MM-dd"/>${applyDate}</td>
-									<c:if test="${list.applyStatus == 0}">
-									<td style="text-align:center;">대기</td>
-									</c:if>
-									<c:if test="${list.applyStatus == 1}">
-									<td style="text-align:center;">승인</td>
-									</c:if>
-									<c:if test="${list.applyStatus == -1}">
-									<td style="text-align:center;">반려</td>
-									</c:if>
-									<c:if test="${list.applyStatus == -2}">
-									<td style="text-align:center;">취소</td>
-									</c:if>
-									<td style="text-align:center;"><a href="#" class="button small">후기</a></td>
-									<td style="text-align:center;"><a href="#" class="button small">교육일지</a></td>
+									<td style="text-align:center;"><a href="keywordDetail?keyId=${list.keyId}">${list.keyId}</a></td>
+									<td style="text-align:center;">${list.keyName}</td>				
 								</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div> <!-- end of Table -->
+					<!-- 버튼영역 -->
+					<ul class="actions special">
+						<li><input type="button" value="등록" class="button primary" onclick="location.href='addKeyword'"></li>
+					</ul>
 					
 					<!--  페이징 시작 -->
 					<div class="pageInfo_wrap">
@@ -161,7 +140,7 @@ $(".changePage").on("click", function(e){
 	 
     e.preventDefault();
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));    
-    moveForm.attr("action", "/myPage/applyListMember")
+    moveForm.attr("action", "/admin/keywordList")
     moveForm.submit();
     
 });

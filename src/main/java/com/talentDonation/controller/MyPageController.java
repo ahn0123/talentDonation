@@ -156,8 +156,8 @@ public class MyPageController {
 
    	// 신청 정보 상세보기 팝업(일반회원)
   	@GetMapping("/applyDetailMember")
-  	public String applyDetailMember(Model model, @RequestParam("applyProgId") int applyProgId, @RequestParam("applyDogId") int applyDogId, @RequestParam("memId") String memId) {
-  		model.addAttribute("list", myPageMapper.getApplyDetailMember(applyProgId, applyDogId, memId)); //신청 정보 상세보기(일반회원)
+  	public String applyDetailMember(Model model, @RequestParam("applyProgId") int applyProgId, @RequestParam("applyDogId") int applyDogId) {
+  		model.addAttribute("list", myPageMapper.getApplyDetailMember(applyProgId, applyDogId)); //신청 정보 상세보기(일반회원)
   		return "myPage/applyDetailMember";
   	}
 
@@ -172,5 +172,12 @@ public class MyPageController {
    		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
    		//model.addAttribute("pageMaker", pageMake);
    		return "myPage/applyListTrainer";
+   	}
+
+   	// 신청 정보 상세보기 팝업(트레이너)
+   	@GetMapping("/applyDetailTrainer")
+   	public String applyDetailTrainer(Model model, @RequestParam("applyProgId") int applyProgId, @RequestParam("applyDogId") int applyDogId) {
+   		model.addAttribute("list", myPageMapper.getApplyDetailTrainer(applyProgId, applyDogId)); //신청 정보 상세보기(트레이너)
+   		return "myPage/applyDetailTrainer";
    	}
 }

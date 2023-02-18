@@ -88,7 +88,7 @@
     <select id="getApplyDetailMember" resultType="com.talentDonation.dto.Apply">
         select m.mem_name, m.mem_tel, d.dog_name, d.dog_breed, d.dog_birthday, p.prog_price, p.prog_title, a.* 
 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id 
-		where p.prog_id=#{applyProgId} and d.dog_id=#{applyDogId} and m.mem_id=#{memId}
+		where p.prog_id=#{applyProgId} and d.dog_id=#{applyDogId}
     </select>
     
     <!-- 신청현황 정보 가져오기(트레이너) -->
@@ -112,6 +112,13 @@
         <!-- <if test="keyword != null">
             <include refid="criteria_applyMember"></include>
         </if> -->
+    </select>
+    
+    <!-- 신청 정보 상세보기(트레이너) -->
+    <select id="getApplyDetailTrainer" resultType="com.talentDonation.dto.Apply">
+        select m.*, d.* 
+        from member m join dog d on m.mem_id = d.dog_mem_id join apply a on d.dog_id = a.apply_dog_id 
+		where a.apply_prog_id = #{applyProgId} and a.apply_dog_id = #{applyDogId}
     </select>
     
 </mapper>

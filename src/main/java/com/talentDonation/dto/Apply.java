@@ -21,11 +21,14 @@ public class Apply {
 	private String dogBreed;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dogBirthday;
+	private int dogWeight;
+	private String dogRemark;
 
 	private int memType;
 	private String memId;
 	private String memName;
 	private String memTel;
+	private String memEmail;
 
 	private String progPrice;
 	private String progTrmemId;

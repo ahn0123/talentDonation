@@ -38,4 +38,11 @@ public interface AdminMapper {
     public int getApplyAdminTotal(Criteria cri); //신청 총 개수
     public List<Apply> getApplyDetailAdmin(int applyProgId, int applyDogId, String memId); //신청 정보 상세보기(Admin)
     void modifyApplyStatus(Apply apply); //신청 정보 상태값 수정
+
+    public List<Keyword> getKeywordList(Criteria cri); //키워드 정보 가져오기
+    public int getKeywordTotal(Criteria cri); //키워드 총 개수
+    void addKeyword(Keyword keyword); //키워드 등록
+    int checkKeyId(int id); //키워드ID 중복 체크
+    public List<Keyword> getKeywordDetail(int keyId); //키워드 정보 상세보기(Admin)
+    void modifyKeywordInfo(Keyword keyword); //키워드 정보 수정
 }
