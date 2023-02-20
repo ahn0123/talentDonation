@@ -32,21 +32,22 @@
 					</ul>
 				</li>
 				<li><a href="<%=request.getContextPath()%>/program/programApplyList">교육과정</a></li>
-				<c:set var="memType" value="${list2.memType}" />
-				<c:if test="${memType == 1}">
+				<%-- <c:set var="memType" value="${list2.memType}" />
+				<c:if test="${memType == 1}"> --%>
 				<li>
 					<a href="#" class="dropdown">마이페이지</a>
 					
 					<ul>
 						<li><a href="<%=request.getContextPath()%>/myPage/myPageMember?memType=${memType}">회원정보 수정</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/applyListMember?memType=${memType}">신청현황</a></li>
-						<li><a href="#">교육일지</a></li>
+						<li><a href="<%=request.getContextPath()%>/myPage/applyListTrainer?memType=${memType}">신청현황(트레이너)</a></li>
+						<li><a href="<%=request.getContextPath()%>/myPage/recordListMember">교육일지</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/dogList?memType=${memType}">반려견 정보</a></li>
 					</ul>
 					
 				</li>
-				</c:if>
-				<c:if test="${memType == 2}">
+				<%-- </c:if> --%>
+				<%-- <c:if test="${memType == 2}">
 				<li>
 					<a href="#" class="dropdown">마이페이지</a>
 					
@@ -57,7 +58,7 @@
 					</ul>
 					
 				</li>
-				</c:if>
+				</c:if> --%>
 				<li><a href="elements.jsp">교육후기</a></li>				
 				<c:if test="${sessionId eq 'admin123'}">
                 <li>

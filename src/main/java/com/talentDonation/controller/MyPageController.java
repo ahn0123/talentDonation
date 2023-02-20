@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.Dog;
 import com.talentDonation.dto.Member;
+import com.talentDonation.dto.PageMakerDTO;
 import com.talentDonation.mapper.MyPageMapper;
 import com.talentDonation.mapper.UserMapper;
 import com.talentDonation.service.EncryptionService;
@@ -143,14 +144,14 @@ public class MyPageController {
 
     // 신청현황 정보 가져오기(일반회원)
    	@GetMapping("/applyListMember")
-   	public String applyListMember(Model model, Criteria cri, HttpSession session) {
+	public String applyListMember(Model model, Criteria cri, HttpSession session) {
    		String memId = (String) session.getAttribute("sessionId");
-   		//log.info("memId:"+memId);
-   		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
-   		model.addAttribute("list", myPageMapper.getApplyListMember(memId)); //신청 현황 정보 가져오기
-   		//int total = myPageMapper.getApplyMemberTotal(memId); //신청현황 총 개수
-   		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
-   		//model.addAttribute("pageMaker", pageMake);
+		//log.info("memId:" + memId);
+		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
+		model.addAttribute("list", myPageMapper.getApplyListMember(memId, cri)); //신청 현황 정보 가져오기
+		int total = myPageMapper.getApplyMemberTotal(memId, cri); //신청현황 총 개수
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		model.addAttribute("pageMaker", pageMake);
    		return "myPage/applyListMember";
    	}
 
@@ -161,16 +162,16 @@ public class MyPageController {
   		return "myPage/applyDetailMember";
   	}
 
-   	// 신청현황 정보 가져오기(트레이너)
+  	// 신청현황 정보 가져오기(트레이너)
    	@GetMapping("/applyListTrainer")
    	public String applyListTrainer(Model model, Criteria cri, HttpSession session) {
    		String memId = (String) session.getAttribute("sessionId");
-   		//log.info("memId:"+memId);
-   		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
-   		model.addAttribute("list", myPageMapper.getApplyListTrainer(memId)); //신청 현황 정보 가져오기(트레이너)
-   		//int total = myPageMapper.getApplyTrainerTotal(memId); //신청현황 총 개수(트레이너)
-   		//PageMakerDTO pageMake = new PageMakerDTO(cri, total);
-   		//model.addAttribute("pageMaker", pageMake);
+		//log.info("memId:"+memId);
+		model.addAttribute("list2", userMapper.getMember(memId)); //회원타입 정보 가져오기
+		model.addAttribute("list", myPageMapper.getApplyListTrainer(memId, cri)); //신청 현황 정보 가져오기(트레이너)
+		int total = myPageMapper.getApplyTrainerTotal(memId, cri); //신청현황 총 개수(트레이너)
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		model.addAttribute("pageMaker", pageMake);
    		return "myPage/applyListTrainer";
    	}
 
@@ -180,4 +181,15 @@ public class MyPageController {
    		model.addAttribute("list", myPageMapper.getApplyDetailTrainer(applyProgId, applyDogId)); //신청 정보 상세보기(트레이너)
    		return "myPage/applyDetailTrainer";
    	}
+
+   	// 교육일지 정보 가져오기
+  	@GetMapping("/recordListMember")
+  	public String recordListMember(Model model, Criteria cri, HttpSession session) {
+  		String dogMemId = (String) session.getAttribute("sessionId");
+  		model.addAttribute("list", myPageMapper.getRecordListMember(dogMemId, cri)); //교육일지 정보 가져오기
+  		int total = myPageMapper.getRecordMemberTotal(dogMemId, cri); //교육일지 총 개수(일반회원)
+		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+		model.addAttribute("pageMaker", pageMake);
+  		return "myPage/recordListMember";
+  	}
 }

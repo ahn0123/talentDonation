@@ -1,0 +1,23 @@
+package com.talentDonation.dto;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Data;
+
+@Data
+public class Record {
+	private int rcDogId;
+	private int rcProgId;
+	private String rcContent;
+	private String rcTitle;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date rcRegDate;
+
+	private String dogMemId;
+
+	private String progTrmemId;
+
+	private int rn;
+}
