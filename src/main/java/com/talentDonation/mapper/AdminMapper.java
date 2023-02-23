@@ -23,7 +23,7 @@ public interface AdminMapper {
     public int getTrainerAdminTotal(Criteria cri); //트레이너 총 인원수
     public List<Member> getTrainerDetail(String memId); //트레이너정보 상세보기(Admin)
     void addTrainer(Trainer trainer); //트레이너 정보 추가 등록
-    void modifyTrainerInfo(Trainer trainer);
+    void modifyTrainerInfo(Trainer trainer); //트레이너 정보 수정
     public List<Trainer> getTrainerName(); //트레이너명 가져오기
     public List<Keyword> getKeyName(); //키워드명 가져오기
 

@@ -51,6 +51,7 @@
 						<li><a href="<%=request.getContextPath()%>/myPage/applyListMember?memType=${memType}">신청현황</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/applyListTrainer?memType=${memType}">신청현황(트레이너)</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/recordListMember">교육일지</a></li>
+						<li><a href="<%=request.getContextPath()%>/myPage/recordListTrainer">교육일지(트레이너)</a></li>
 						<li><a href="<%=request.getContextPath()%>/myPage/dogList?memType=${memType}">반려견 정보</a></li>
 					</ul>
 					

@@ -121,7 +121,7 @@
 		where a.apply_prog_id = #{applyProgId} and a.apply_dog_id = #{applyDogId}
     </select>
     
-    <!-- 검색 조건문(교육일지 목록) -->
+    <!-- 검색 조건문(교육일지 목록_일반회원) -->
     <sql id="criteria_recordMember">
         <if test="cri.type != null and cri.keyword != null">
             <trim prefix="where" suffix="" prefixOverrides="OR">
@@ -129,10 +129,10 @@
                     <trim prefix="OR">
                         <choose>
                         	<when test="type == 'T'.toString()">
-                                rc_title LIKE '%'|| #{keyword} ||'%'
+                                rc_title LIKE '%'|| #{cri.keyword} ||'%'
                             </when>
                             <when test="type == 'I'.toString()">
-                                prog_trmem_id LIKE '%'|| #{keyword} ||'%'
+                                prog_trmem_id LIKE '%'|| #{cri.keyword} ||'%'
                             </when>                           
                         </choose>
                     </trim>
@@ -141,17 +141,16 @@
         </if>
     </sql>
     
-	<!-- 교육일지 정보 가져오기 -->
+	<!-- 교육일지 정보 가져오기(일반회원) -->
     <select id="getRecordListMember" parameterType="list" resultType="com.talentDonation.dto.Record">
-        select * from (select A.* from (select rownum as rn, r.*, d.dog_mem_id, p.prog_trmem_id 
+        select * from (select A.* from (select rownum as rn, r.*, d.dog_mem_id, d.dog_name, p.prog_trmem_id, p.prog_title 
         from record r join dog d on r.rc_dog_id = d.dog_id join program p on r.rc_prog_id = p.prog_id 
         where d.dog_mem_id = #{dogMemId} ) A
         <if test="cri.keyword != null">
            <include refid="criteria_recordMember"></include>
         </if>        
         ) B
-        where rn between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})
-        <!-- where rn between 1 and 10 -->       
+        where rn between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})      
     </select>
     
     <!-- 교육일지 총 개수(일반회원) -->
@@ -163,5 +162,68 @@
             <include refid="criteria_recordMember"></include>
         </if>
     </select>
+    
+    <!-- 교육일지 상세정보(일반회원) -->
+    <select id="getRecordDetailMember" resultType="com.talentDonation.dto.Record">
+        select r.*, d.dog_name, p.prog_trmem_id, p.prog_title 
+        from record r join dog d on r.rc_dog_id = d.dog_id join program p on r.rc_prog_id = p.prog_id 
+        where r.rc_prog_id = #{rcProgId} and r.rc_dog_id = #{rcDogId}
+    </select>
+    
+    <!-- 검색 조건문(교육일지 목록_트레이너) -->
+    <sql id="criteria_recordTrainer">
+        <if test="cri.type != null and cri.keyword != null">
+            <trim prefix="where" suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="cri.typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'T'.toString()">
+                                rc_title LIKE '%'|| #{cri.keyword} ||'%'
+                            </when>
+                            <when test="type == 'I'.toString()">
+                                dog_mem_id LIKE '%'|| #{cri.keyword} ||'%'
+                            </when>                           
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+	<!-- 교육일지 정보 가져오기(트레이너) -->
+    <select id="getRecordListTrainer" parameterType="list" resultType="com.talentDonation.dto.Record">
+        select * from (select * from (select rownum as rn, r.*, p.prog_trmem_id, p.prog_title, d.dog_mem_id, d.dog_name 
+		from record r join program p on r.rc_prog_id = p.prog_id join dog d on r.rc_dog_id = d.dog_id 
+		where p.prog_trmem_id = #{progTrmemId}) A
+        <if test="cri.keyword != null">
+           <include refid="criteria_recordTrainer"></include>
+        </if>        
+        ) B
+        where rn between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})       
+    </select>
+    
+    <!-- 교육일지 총 개수(트레이너) -->
+    <select id="getRecordTrainerTotal" resultType="int">
+        select count(*) from (select rownum as rn, r.*, p.prog_trmem_id, d.dog_mem_id 
+		from record r join program p on r.rc_prog_id = p.prog_id join dog d on r.rc_dog_id = d.dog_id 
+		where p.prog_trmem_id = #{progTrmemId})
+        <if test="cri.keyword != null">
+            <include refid="criteria_recordTrainer"></include>
+        </if>
+    </select>
+    
+    <!-- 교육일지 상세정보(트레이너) -->
+    <select id="getRecordDetailTrainer" resultType="com.talentDonation.dto.Record">
+        select r.*, d.dog_mem_id, d.dog_name, p.prog_title 
+        from record r join program p on r.rc_prog_id = p.prog_id join dog d on r.rc_dog_id = d.dog_id 
+        where r.rc_prog_id = #{rcProgId} and r.rc_dog_id = #{rcDogId}
+    </select>
+    
+    <!-- 교육일지 정보 수정 -->
+    <update id="modifyRecordInfo">
+        update record 
+        set rc_title = #{rcTitle}, rc_content = #{rcContent} 
+        where rc_prog_id = #{rcProgId} and rc_dog_id = #{rcDogId}
+    </update>
     
 </mapper>

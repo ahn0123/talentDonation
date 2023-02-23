@@ -59,8 +59,10 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">번호</th>
+									<th style="text-align:center;">교육명</th>
 									<th style="text-align:center;">제목</th>
 									<th style="text-align:center;">트레이너ID</th>
+									<th style="text-align:center;">반려견명</th>
 									<th style="text-align:center;">작성일</th>
 								</tr>
 							</thead>
@@ -68,8 +70,10 @@
 								<c:forEach var="list" items="${list}">
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
+									<td style="text-align:center;">${list.progTitle}</td>
 									<td style="text-align:center;"><a href="recordDetailMember?rcProgId=${list.rcProgId}&rcDogId=${list.rcDogId}">${list.rcTitle}</a></td>
 									<td style="text-align:center;">${list.progTrmemId}</td>
+									<td style="text-align:center;">${list.dogName}</td>
 									<td style="text-align:center;"><fmt:formatDate var="rcRegDate" value="${list.rcRegDate}" pattern="yyyy-MM-dd"/>${rcRegDate}</td>
 								</tr>
 								</c:forEach>

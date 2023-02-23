@@ -90,7 +90,7 @@
 									<c:if test="${list.applyStatus == -2}">
 									<td style="text-align:center;">취소</td>
 									</c:if>
-									<td style="text-align:center;"><a href="#" class="button small">교육일지</a></td>
+									<td style="text-align:center;"><a href="/myPage/recordDetailTrainer?rcProgId=${list.applyProgId}&rcDogId=${list.applyDogId}" class="button small">교육일지</a></td>
 								</tr>
 								</c:forEach>
 							</tbody>

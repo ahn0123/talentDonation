@@ -80,7 +80,7 @@
         values (#{memId}, #{trCareer}, #{trLicense})
     </insert>
     
-    <!-- 트레이너정보 수정 -->
+    <!-- 트레이너 정보 수정 -->
     <update id="modifyTrainerInfo">
         update trainer
         set tr_career = #{trCareer}, tr_license = #{trLicense} 

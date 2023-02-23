@@ -182,14 +182,46 @@ public class MyPageController {
    		return "myPage/applyDetailTrainer";
    	}
 
-   	// 교육일지 정보 가져오기
+   	// 교육일지 정보 가져오기(일반회원)
   	@GetMapping("/recordListMember")
   	public String recordListMember(Model model, Criteria cri, HttpSession session) {
   		String dogMemId = (String) session.getAttribute("sessionId");
-  		model.addAttribute("list", myPageMapper.getRecordListMember(dogMemId, cri)); //교육일지 정보 가져오기
+  		model.addAttribute("list", myPageMapper.getRecordListMember(dogMemId, cri)); //교육일지 정보 가져오기(일반회원)
   		int total = myPageMapper.getRecordMemberTotal(dogMemId, cri); //교육일지 총 개수(일반회원)
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
   		return "myPage/recordListMember";
   	}
+
+  	// 교육일지 상세정보(일반회원)
+   	@GetMapping("/recordDetailMember")
+   	public String recordDetailMember(Model model, @RequestParam("rcProgId") int rcProgId, @RequestParam("rcDogId") int rcDogId) {
+   		model.addAttribute("list", myPageMapper.getRecordDetailMember(rcProgId, rcDogId)); //교육일지 상세정보(일반회원)
+   		return "myPage/recordDetailMember";
+   	}
+
+  	// 교육일지 정보 가져오기(트레이너)
+   	@GetMapping("/recordListTrainer")
+   	public String recordListTrainer(Model model, Criteria cri, HttpSession session) {
+   		String progTrmemId = (String) session.getAttribute("sessionId");
+   		model.addAttribute("list", myPageMapper.getRecordListTrainer(progTrmemId, cri)); //교육일지 정보 가져오기(트레이너)
+   		int total = myPageMapper.getRecordTrainerTotal(progTrmemId, cri); //교육일지 총 개수(트레이너)
+ 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+ 		model.addAttribute("pageMaker", pageMake);
+   		return "myPage/recordListTrainer";
+   	}
+
+   	// 교육일지 상세정보(트레이너)
+   	@GetMapping("/recordDetailTrainer")
+   	public String recordDetailTrainer(Model model, @RequestParam("rcProgId") int rcProgId, @RequestParam("rcDogId") int rcDogId) {
+   		model.addAttribute("list", myPageMapper.getRecordDetailTrainer(rcProgId, rcDogId)); //교육일지 상세정보(트레이너)
+   		return "myPage/recordDetailTrainer";
+   	}
+
+   	// 교육일지 정보 수정(ajax)
+    @PostMapping(path = "/modifyRecordInfo", produces = "text/json; charset=utf-8")
+    public String modifyRecordInfo(Model model, @ModelAttribute Record record) {
+    	myPageMapper.modifyRecordInfo(record);
+        return "redirect:/myPage/recordListTrainer";
+    }
 }

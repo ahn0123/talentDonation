@@ -28,6 +28,12 @@ public interface MyPageMapper {
 	public int getApplyTrainerTotal(String memId, Criteria cri); //신청현황 총 개수(트레이너)
     public List<Apply> getApplyDetailTrainer(int applyProgId, int applyDogId); //신청 정보 상세보기(트레이너)
 
-    public List<Record> getRecordListMember(String dogMemId, Criteria cri); //교육일지 정보 가져오기
+    public List<Record> getRecordListMember(String dogMemId, Criteria cri); //교육일지 정보 가져오기(일반회원)
     public int getRecordMemberTotal(String dogMemId, Criteria cri); //교육일지 총 개수(일반회원)
+    public List<Record> getRecordDetailMember(int rcProgId, int rcDogId); //교육일지 상세정보(일반회원)
+
+    public List<Record> getRecordListTrainer(String progTrmemId, Criteria cri); //교육일지 정보 가져오기(트레이너)
+    public int getRecordTrainerTotal(String progTrmemId, Criteria cri); //교육일지 총 개수(트레이너)
+    public List<Record> getRecordDetailTrainer(int rcProgId, int rcDogId); //교육일지 상세정보(트레이너)
+    void modifyRecordInfo(Record record); //교육일지 정보 수정
 }

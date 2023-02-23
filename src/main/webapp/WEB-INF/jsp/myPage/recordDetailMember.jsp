@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PTA APPLYDETAILTRAINER</title>
+    <title>PTA RECORDDETAILMEMBER</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
@@ -25,7 +25,7 @@
 		<div class="wrapper">
 			<div class="inner3">
 				<header class="major">
-					<h2>교육신청 상세정보(트레이너)</h2>
+					<h2>교육일지 상세정보</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -34,43 +34,35 @@
 							<c:forEach var="list" items="${list}">
 							<div class="fields">
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">신청인</label>
-									<input name="memName" id="memName" type="text" value="${list.memName}" readonly />																		
-								</div>			
-								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">연락처</label>
-									<input name="memTel" id="memTel" type="text" value="${list.memTel}" readonly />
+									<label style="text-align: left; color:cornflowerblue">교육명</label>
+									<input name="progTitle" id="progTitle" type="text" value="${list.progTitle}" readonly />																		
 								</div>
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">이메일</label>
-									<input name="memEmail" id="memEmail" type="text" value="${list.memEmail}" readonly />
+									<label style="text-align: left; color:cornflowerblue">작성자</label>
+									<input name="progTrmemId" id="progTrmemId" type="text" value="${list.progTrmemId}" readonly />																		
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">반려견명</label>
-									<input name="dogName" id="dogName" type="text" value="${list.dogName}" readonly />
+									<input name="dogName" id="dogName" type="text" value="${list.dogName}" readonly />																		
+								</div>	
+								<div class="field">
+									<label style="text-align: left; color:cornflowerblue">작성일</label>
+									<fmt:formatDate var="rcRegDate" value="${list.rcRegDate}" pattern="yyyy-MM-dd"/>
+									<input name="rcRegDate" id="rcRegDate" type="text" value="${rcRegDate}" readonly />
 								</div>
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">견종</label>
-									<input name="memTel" id="memTel" type="text" value="${list.dogBreed}" readonly />
+									<label style="text-align: left; color:cornflowerblue">제목</label>
+									<input name="rcTitle" id="rcTitle" type="text" value="${list.rcTitle}" readonly />
 								</div>
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">반려견 생일</label>
-									<fmt:formatDate var="dogBirthday" value="${list.dogBirthday}" pattern="yyyy-MM-dd"/>
-									<input name="dogBirthday" id="dogBirthday" type="text" value="${dogBirthday}" readonly />
-								</div>
-								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">반려견 무게</label>
-									<input name="dogWeight" id="dogWeight" type="text" value="${list.dogWeight}" readonly />
-								</div>
-								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">반려견 비고</label>
-									<input name="dogRemark" id="dogRemark" type="text" value="${list.dogRemark}" readonly />
+									<label style="text-align: left; color:cornflowerblue">내용</label>
+									<textarea name="rcContent" id="rcContent" rows="3" readonly>${list.rcContent}</textarea>
 								</div>
 							</div>
 							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
-								<li><input type="button" value="닫기" class="button" onclick="window.close()"></li>
+								<li><input type="button" value="목록가기" class="button" onclick="location.href='recordListMember'"></li>
 							</ul>
 						</form>
 					</div>
