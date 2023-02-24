@@ -59,6 +59,7 @@
 							<ul class="actions special">
 								<li><input type="button" value="등록" class="button primary" id="addDog_btn"></li>
 							</ul>
+							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" ></p>
 						</form>
 					</div>
 				</div> <!-- end of content -->

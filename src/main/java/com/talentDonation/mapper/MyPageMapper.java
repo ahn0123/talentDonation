@@ -9,6 +9,7 @@ import com.talentDonation.dto.Apply;
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.Dog;
 import com.talentDonation.dto.Member;
+import com.talentDonation.dto.Record;
 
 @Mapper
 @Repository
@@ -36,4 +37,6 @@ public interface MyPageMapper {
     public int getRecordTrainerTotal(String progTrmemId, Criteria cri); //교육일지 총 개수(트레이너)
     public List<Record> getRecordDetailTrainer(int rcProgId, int rcDogId); //교육일지 상세정보(트레이너)
     void modifyRecordInfo(Record record); //교육일지 정보 수정
+    public int recordCount(int rcProgId, int rcDogId); //신청내용별 교육일지 카운트
+    void addRecord(Record record); //교육일지 등록
 }

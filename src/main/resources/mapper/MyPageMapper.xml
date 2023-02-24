@@ -226,4 +226,14 @@
         where rc_prog_id = #{rcProgId} and rc_dog_id = #{rcDogId}
     </update>
     
+    <!-- 신청내용별 교육일지 카운트 -->
+    <select id="recordCount" resultType="int">
+        select count(*) from record where rc_prog_id = #{rcProgId} and rc_dog_id = #{rcDogId}
+    </select>
+    
+    <!-- 교육일지 등록 -->   
+    <insert id="addRecord">
+    	insert into record values(#{rcDogId}, #{rcProgId}, #{rcTitle}, #{rcContent}, sysdate)    	
+    </insert>
+    
 </mapper>

@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.Dog;
 import com.talentDonation.dto.Member;
 import com.talentDonation.dto.PageMakerDTO;
+import com.talentDonation.dto.Record;
 import com.talentDonation.mapper.MyPageMapper;
 import com.talentDonation.mapper.UserMapper;
 import com.talentDonation.service.EncryptionService;
@@ -221,7 +223,31 @@ public class MyPageController {
    	// 교육일지 정보 수정(ajax)
     @PostMapping(path = "/modifyRecordInfo", produces = "text/json; charset=utf-8")
     public String modifyRecordInfo(Model model, @ModelAttribute Record record) {
+    	//myPageMapper.modifyRecordInfo(record);
     	myPageMapper.modifyRecordInfo(record);
         return "redirect:/myPage/recordListTrainer";
+    }
+
+    // 교육일지 등록 페이지로 이동
+ 	@GetMapping("/addRecord")
+ 	public String addRecord(Model model, @RequestParam("rcProgId") int rcProgId, @RequestParam("rcDogId") int rcDogId,
+ 			RedirectAttributes re) {
+ 		int cnt = myPageMapper.recordCount(rcProgId, rcDogId); //신청내용별 교육일지 카운트
+ 		if (cnt == 0) {
+ 			model.addAttribute("rcProgId", rcProgId);
+ 			model.addAttribute("rcDogId", rcDogId);
+ 			return "myPage/addRecord";
+ 		} else {
+ 			re.addAttribute("rcProgId", rcProgId);
+ 			re.addAttribute("rcDogId", rcDogId);
+ 			return "redirect:/myPage/recordDetailTrainer";
+ 		}
+ 	}
+
+ 	// 교육일지 등록
+    @PostMapping("/addRecord")
+    public String addRecord(Model model, @ModelAttribute Record record) {
+    	myPageMapper.addRecord(record);
+        return "myPage/addRecord";
     }
 }

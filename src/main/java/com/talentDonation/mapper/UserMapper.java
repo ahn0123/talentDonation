@@ -21,5 +21,7 @@ public interface UserMapper {
 
 	Member getMember(String memId); // memId로 해당 멤버 정보 모두 가져오기
 
+	public int getType(String memId); //memId로 해당 멤버 타입 가져오기
+
 	public void deleteMember(String memId); // 회원탈퇴
 }

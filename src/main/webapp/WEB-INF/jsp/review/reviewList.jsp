@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PTA APPLYLISTTRAINER</title>
+    <title>PTA REVIEWLIST</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
@@ -25,7 +25,7 @@
 		<div class="wrapper">
 			<div class="inner5">
 				<header class="major">
-					<h2>교육신청 현황(트레이너)</h2>
+					<h2>교육후기 목록</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
@@ -37,9 +37,9 @@
 							<td>					
 							<select name="type" class="se_type01" style="width:150px" >
 			                        <option value="" ${pageMaker.cri.type == null ? 'selected' : ''}>검색 기준</option>
-			                        <option value="P" ${pageMaker.cri.type == 'P' ? 'selected' : ''}>교육과정</option>
-			                        <option value="T" ${pageMaker.cri.type == 'T' ? 'selected' : ''}>신청인</option>
-			                        <option value="D" ${pageMaker.cri.type == 'D' ? 'selected' : ''}>반려견명</option>
+			                        <option value="P" ${pageMaker.cri.type == 'P' ? 'selected' : ''}>교육명</option>
+			                        <option value="T" ${pageMaker.cri.type == 'T' ? 'selected' : ''}>제목</option>
+			                        <option value="I" ${pageMaker.cri.type == 'I' ? 'selected' : ''}>회원ID</option>
 			                </select>       	
 				        	</td>
 				        	<td>
@@ -60,13 +60,10 @@
 							<thead>
 								<tr>
 									<th style="text-align:center;">번호</th>
-									<th style="text-align:center;">교육과정</th>
-									<th style="text-align:center;">신청인</th>
-									<th style="text-align:center;">반려견명</th>
-									<th style="text-align:center;">장소</th>
-									<th style="text-align:center;">신청일자</th>
-									<th style="text-align:center;">처리상태</th>
-									<th style="text-align:center;">교육일지</th>
+									<th style="text-align:center;">교육명</th>
+									<th style="text-align:center;">제목</th>
+									<th style="text-align:center;">회원ID</th>
+									<th style="text-align:center;">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -74,24 +71,9 @@
 								<tr>
 									<td style="text-align:center;">${list.rn}</td>
 									<td style="text-align:center;">${list.progTitle}</td>
-									<td style="text-align:center;"><a href="applyDetailTrainer?applyProgId=${list.applyProgId}&applyDogId=${list.applyDogId}" onclick="window.open(this.href,'Detail','width=500px, height=400px, top=200, left=570, toolbar=no, scrollbars=no, resizable=yes');return false;" target="_blank">${list.memName}</a></td>
-									<td style="text-align:center;">${list.dogName}</td>
-									<td style="text-align:center;">${list.progLocation}</td>
-									<td style="text-align:center;"><fmt:formatDate var="applyDate" value="${list.applyDate}" pattern="yyyy-MM-dd"/>${applyDate}</td>
-									<c:if test="${list.applyStatus == 0}">
-									<td style="text-align:center;">대기</td>
-									</c:if>
-									<c:if test="${list.applyStatus == 1}">
-									<td style="text-align:center;">승인</td>
-									</c:if>
-									<c:if test="${list.applyStatus == -1}">
-									<td style="text-align:center;">반려</td>
-									</c:if>
-									<c:if test="${list.applyStatus == -2}">
-									<td style="text-align:center;">취소</td>
-									</c:if>
-									<%-- <td style="text-align:center;"><a href="/myPage/recordDetailTrainer?rcProgId=${list.applyProgId}&rcDogId=${list.applyDogId}" class="button small">교육일지</a></td> --%>
-									<td style="text-align:center;"><a href="/myPage/addRecord?rcProgId=${list.applyProgId}&rcDogId=${list.applyDogId}" class="button small">교육일지</a></td>
+									<td style="text-align:center;"><a href="reviewDetail?revProgId=${list.revProgId}&revDogId=${list.revDogId}">${list.revTitle}</a></td>
+									<td style="text-align:center;">${list.dogMemId}</td>
+									<td style="text-align:center;"><fmt:formatDate var="revRegDate" value="${list.revRegDate}" pattern="yyyy-MM-dd"/>${revRegDate}</td>
 								</tr>
 								</c:forEach>
 							</tbody>
@@ -160,7 +142,7 @@ $(".changePage").on("click", function(e){
 	 
     e.preventDefault();
     moveForm.find("input[name='pageNum']").val($(this).attr("href"));    
-    moveForm.attr("action", "/myPage/applyListTrainer")
+    moveForm.attr("action", "/review/reviewList")
     moveForm.submit();
     
 });

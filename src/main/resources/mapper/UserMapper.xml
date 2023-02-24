@@ -34,6 +34,11 @@
         select * from member where mem_id = #{memId}
     </select>
     
+    <!-- memId로 해당 멤버 타입 가져오기 -->
+    <select id="getType" resultType="int">
+        select mem_type from member where mem_id = #{memId}
+    </select>
+    
     <!-- 회원정보 삭제 -->
     <update id="deleteMember">
         update member

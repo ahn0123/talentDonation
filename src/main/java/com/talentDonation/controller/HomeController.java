@@ -40,15 +40,11 @@ public class HomeController {
 
 	@GetMapping("/")
     public String main(Model model, HttpSession session) {
-		String memId = (String) session.getAttribute("sessionId");
-		model.addAttribute("list2", userMapper.getMember(memId)); //회원 유형 가져오기
         return "index";
     }
 
 	@GetMapping("index")
 	public String index(Model model, HttpSession session) {
-		String memId = (String) session.getAttribute("sessionId");
-		model.addAttribute("list2", userMapper.getMember(memId)); //회원 유형 가져오기
 		return "index";
 	}
 
@@ -84,6 +80,9 @@ public class HomeController {
         }
         session.setAttribute("sessionId", userMapper.getId(map.get("memId"))); // 세션값 등록
         model.addAttribute("sessionId", session.getAttribute("sessionId"));
+        session.setAttribute("memType", userMapper.getType(map.get("memId"))); //회원타입 등록
+		model.addAttribute("memType", session.getAttribute("memType"));
+
         return "redirect:/";
     }
 
