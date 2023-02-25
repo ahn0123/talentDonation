@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>PTA ADDRECORD</title>
+    <title>PTA ADDREVIEW</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="" />
@@ -24,29 +24,33 @@
 		<div class="wrapper">
 			<div class="inner3">
 				<header class="major">
-					<h2>교육일지 등록</h2>
+					<h2>교육후기 등록</h2>
 				</header>
 				<br>
 				<div class="content"> <!-- start of content -->
 				    <div class="form">
-						<form method="post" action="/myPage/addRecord" id="addRecordForm">
+						<form method="post" action="/review/addReview" id="addReviewForm">
 							
 							<div class="fields">
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">제목</label>
-									<input name="rcTitle" id="rcTitle" type="text" />																	
+									<input name="revTitle" id="revTitle" type="text" />																	
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">내용</label>
-									<textarea name="rcContent" id="rcContent" rows="3" placeholder="내용을 작성해주세요"></textarea>
+									<textarea name="revContent" id="revContent" rows="3" placeholder="내용을 작성해주세요"></textarea>
 								</div>
-								<input type="hidden" name="rcProgId" id="rcProgId" value="${rcProgId}" />
-								<input type="hidden" name="rcDogId" id="rcDogId" value="${rcDogId}" />
+								<div class="field">
+									<label style="text-align: left; color:cornflowerblue">별점</label>
+									<input name="revRate" id="revRate" type="text" />																	
+								</div>
+								<input type="hidden" name="revProgId" id="revProgId" value="${revProgId}" />
+								<input type="hidden" name="revDogId" id="revDogId" value="${revDogId}" />
 							</div>
 							
 							<!-- 버튼영역 -->
 							<ul class="actions special">
-								<li><input type="button" value="등록" class="button primary" id="addRecord_btn"></li>
+								<li><input type="button" value="등록" class="button primary" id="addReview_btn"></li>
 							</ul>
 							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" ></p>
 						</form>
@@ -72,17 +76,20 @@
 	//빈 칸이 있는지 확인
 	$(document).ready(function (e) {
 	
-		$("#addRecord_btn").click(function () {
+		$("#addReview_btn").click(function () {
 	
-			const rcTitle = $("#rcTitle").val().replaceAll(" ", "");
-			const rcContent = $("#rcContent").val().replaceAll(" ", "");
+			const revTitle = $("#revTitle").val().replaceAll(" ", "");
+			const revContent = $("#revContent").val().replaceAll(" ", "");
+			const revRate = $("#revRate").val().replaceAll(" ", "");
 	
-			if (!rcTitle) {
+			if (!revTitle) {
 				$("#checking").text("제목을 입력하세요");
-			} else if (!rcContent) {
+			} else if (!revContent) {
 				$("#checking").text("내용을 입력하세요");
+			} else if (!revRate) {
+				$("#checking").text("별점을 입력하세요");
 			} else {
-				$("#addRecordForm").submit();
+				$("#addReviewForm").submit();
 			}
 	
 		})

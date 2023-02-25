@@ -23,23 +23,6 @@
 				<nav id="nav">
 					<ul>
 						<li class="current"><a href="index">Home</a></li>
-						<li>
-							<a href="#" class="dropdown">사이트소개</a>
-							<ul>
-								<li><a href="#">Option One</a></li>
-								<li><a href="#">Option Two</a></li>
-								<li><a href="#">Option Three</a></li>
-								<li>
-									<a href="#">Submenu</a>
-									<ul>
-										<li><a href="#">Option One</a></li>
-										<li><a href="#">Option Two</a></li>
-										<li><a href="#">Option Three</a></li>
-										<li><a href="#">Option Four</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
 						<li><a href="<%=request.getContextPath()%>/program/programApplyList">교육과정</a></li>
 						<li>
 							<a href="#" class="dropdown">마이페이지</a>

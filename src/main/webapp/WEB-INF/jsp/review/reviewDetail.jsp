@@ -43,11 +43,11 @@
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">제목</label>
-									<input name="revTitle" id="revTitle" type="text" value="${list.revTitle}" readonly />																		
+									<input name="revTitle" id="revTitle" type="text" value="${list.revTitle}" />																		
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">내용</label>
-									<textarea name="revContent" id="revContent" rows="3" readonly>${list.revContent}</textarea>
+									<textarea name="revContent" id="revContent" rows="3">${list.revContent}</textarea>
 								</div>	
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">작성일</label>
@@ -58,10 +58,13 @@
 									<label style="text-align: left; color:cornflowerblue">별점</label>
 									<input name="revRate" id="revRate" type="text" value="${list.revRate}" readonly />
 								</div>
+								<input name="revProgId" id="revProgId" type="hidden" value="${list.revProgId}" />
+								<input name="revDogId" id="revDogId" type="hidden" value="${list.revDogId}" />
 							</div>
 							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
+								<li><input type="button" value="수정" class="button primary" id="editReview_btn"></li>
 								<li><input type="button" value="목록가기" class="button" onclick="location.href='reviewList'"></li>
 							</ul>
 						</form>
@@ -82,6 +85,39 @@
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
 <script src="../assets/js/main.js"></script>
+
+<script>
+	//ajax (교육후기 수정)
+	$("#editReview_btn").click(function (){
+	
+		var revProgId = document.getElementById('revProgId').value;
+		var revDogId = document.getElementById('revDogId').value;
+		var revTitle = document.getElementById('revTitle').value;
+		var revContent = document.getElementById('revContent').value;
+		
+		var param = {
+			revProgId: revProgId,
+			revDogId: revDogId,
+			revTitle: revTitle,
+			revContent: revContent
+		};            
+		 
+		$.ajax({		
+			type : "post",
+			data : param,
+			url : "/review/modifyReviewInfo",
+			 
+			success : function(result) {
+				alert("성공적으로 수정되었습니다");	
+				location.href = "reviewList";
+			},		
+			error : function(result) {
+				alert("오류가 발생했습니다");	
+			}
+		});
+		
+	});
+</script>
 
 </body>
 </html>
