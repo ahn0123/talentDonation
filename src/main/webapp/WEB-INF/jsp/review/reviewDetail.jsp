@@ -61,12 +61,15 @@
 								<input name="revProgId" id="revProgId" type="hidden" value="${list.revProgId}" />
 								<input name="revDogId" id="revDogId" type="hidden" value="${list.revDogId}" />
 							</div>
-							</c:forEach>
+							
 							<!-- 버튼영역 -->
 							<ul class="actions special">
+								<c:if test="${list.dogMemId == sessionId}">
 								<li><input type="button" value="수정" class="button primary" id="editReview_btn"></li>
+								</c:if>
 								<li><input type="button" value="목록가기" class="button" onclick="location.href='reviewList'"></li>
 							</ul>
+							</c:forEach>
 						</form>
 					</div>
 				</div> <!-- end of content -->

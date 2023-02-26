@@ -14,6 +14,8 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -157,20 +159,22 @@
 					</header>
 					<div class="wrapper style3">
 						<div class="inner">
+						<div class="slick-slider">
 							<div class="profiles">
+							<c:forEach var="list" items="${list}">
 								<div class="profile">
 									<div class="image">
-										<img src="images/pic05.jpg" alt="" />
+										<img src="images/pet03.jpeg" alt="" style="width:150px; height:150px" />
 									</div>
 									<div class="content">
-										<h3>Ipsum nullam</h3>
-										<p>Sed egestas, ante et vulputate volutpat pede semper est luctus metus eu augue. Morbi purus amet libero.</p>
+										<h3>${list.progTitle}</h3>
+										<p>${list.progContent}</p>
 										<ul class="actions">
-											<li><a href="#" class="button small">More</a></li>
+											<li><a href="program/programApplyDetail?progId=${list.progId}&memId=${sessionId}" class="button small">신청</a></li>
 										</ul>
 									</div>
 								</div>
-								<div class="profile">
+								<!-- <div class="profile">
 									<div class="image">
 										<img src="images/pic06.jpg" alt="" />
 									</div>
@@ -193,8 +197,10 @@
 											<li><a href="#" class="button small">More</a></li>
 										</ul>
 									</div>
-								</div>
+								</div> -->
+							</c:forEach>
 							</div>
+						</div>
 						</div>
 					</div>
 					<footer>
@@ -271,6 +277,44 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<script>
+			    $('.slick-slider').slick({
+			        slidesToShow: 3, // 보여질 슬라이드 수
+			        slidesToScroll: 1, // 넘겨질 슬라이드 수
+			        //infinite : true, //무한 반복 옵션
+			        autoplay: true, // 자동 넘김 여부
+			        autoplaySpeed: 4800, // 자동 넘김시 슬라이드 시간
+			        pauseOnHover:true, // 마우스 hover시 슬라이드 멈춤
+			        arrows: false, // next, prev 이동 버튼
+			        speed : 200 // 슬라이드 속도
+			        // dots: true
+			/*         responsive: [ // -> 반응형 옵션
+			        	{
+			        	      breakpoint: 1024, // 반응형 ~ 1024
+			        	      settings: {
+			        	        slidesToShow: 3,
+			        	        slidesToScroll: 3,
+			        	        infinite: true,
+			        	        dots: true
+			        	      }
+			        	    },
+			        	    {
+			        	      breakpoint: 600,// 반응형 ~ 600
+			        	      settings: {
+			        	        slidesToShow: 2,
+			        	        slidesToScroll: 2
+			        	      }
+			        	    },
+			        	    {
+			        	      breakpoint: 480,// 반응형 ~ 480
+			        	      settings: {
+			        	        slidesToShow: 1,
+			        	        slidesToScroll: 1
+			        	      }
+			        	    } */
+			      });
+			</script>
 
 	</body>
 </html>
