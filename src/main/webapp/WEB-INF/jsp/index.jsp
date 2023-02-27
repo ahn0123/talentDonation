@@ -15,6 +15,7 @@
 		<meta name="keywords" content="" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	</head>
 	<body class="is-preload">
@@ -157,9 +158,11 @@
 						<h2>Ante gravida elementum</h2>
 						<p>Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum lorem ipsum dolor sit amet consequat hendrerit tortor semper lorem at felis.</p>
 					</header>
+					<div class="slick-slider">
 					<div class="wrapper style3">
+					
 						<div class="inner">
-						<div class="slick-slider">
+						
 							<div class="profiles">
 							<c:forEach var="list" items="${list}">
 								<div class="profile">
@@ -168,7 +171,9 @@
 									</div>
 									<div class="content">
 										<h3>${list.progTitle}</h3>
-										<p>${list.progContent}</p>
+										<p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; 
+										-webkit-line-clamp: 3; -webkit-box-orient: vertical; resize: none; height: 100px;">
+										${list.progContent}</p>
 										<ul class="actions">
 											<li><a href="program/programApplyDetail?progId=${list.progId}&memId=${sessionId}" class="button small">신청</a></li>
 										</ul>
@@ -199,10 +204,12 @@
 									</div>
 								</div> -->
 							</c:forEach>
-							</div>
-						</div>
-						</div>
-					</div>
+							</div><!--//profiles-->
+						
+						</div><!--//inner-->
+						
+					</div><!--//wrapper style3-->
+					</div><!--//slick-slider-->
 					<footer>
 						<ul class="actions">
 							<li><a href="#" class="button">Learn More</a></li>
@@ -284,10 +291,10 @@
 			        slidesToScroll: 1, // 넘겨질 슬라이드 수
 			        //infinite : true, //무한 반복 옵션
 			        autoplay: true, // 자동 넘김 여부
-			        autoplaySpeed: 4800, // 자동 넘김시 슬라이드 시간
+			        autoplaySpeed: 2800, // 자동 넘김시 슬라이드 시간
 			        pauseOnHover:true, // 마우스 hover시 슬라이드 멈춤
 			        arrows: false, // next, prev 이동 버튼
-			        speed : 200 // 슬라이드 속도
+			        speed : 300 // 슬라이드 속도
 			        // dots: true
 			/*         responsive: [ // -> 반응형 옵션
 			        	{
