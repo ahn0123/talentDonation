@@ -11,6 +11,13 @@
 	<meta name="keywords" content="" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     
+    <!-- datepicker 달력  -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="../assets/js/datepicker-ko.js"></script>
+	<script src="../assets/js/datepicker-set.js"></script>
+    
 </head>
 <body class="is-preload">
 	<c:if test="${empty sessionId}">
@@ -54,8 +61,8 @@
 									<textarea name="progContent" id="progContent" rows="3" placeholder="소개글을 작성해주세요"></textarea>
 								</div>
 								<div class="field">
-									<label style="text-align: left; color:cornflowerblue">모집마감일</label>
-									<input name="progDue" id="progDue" type="text" />
+									<label style="text-align: left; color:cornflowerblue">모집마감일</label>									
+									<input type="text" class="datepicker inpType" name="progDue" id="progDue">
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">트레이너명</label>
@@ -87,11 +94,11 @@
 								</div>								
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">시작일</label>
-									<input name="progStartDate" id="progStartDate" type="text" />
+									<input class="datepicker inpType" name="progStartDate" id="progStartDate" type="text" />
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">종료일</label>
-									<input name="progEndDate" id="progEndDate" type="text" />
+									<input class="datepicker inpType" name="progEndDate" id="progEndDate" type="text" />
 								</div>
 							</div>
 							
@@ -112,7 +119,7 @@
 	<%@include file ="../footer.jsp" %>
 	
 <!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
+<!-- <script src="../assets/js/jquery.min.js"></script> -->
 <script src="../assets/js/jquery.dropotron.min.js"></script>
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>

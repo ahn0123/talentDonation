@@ -15,8 +15,16 @@
 		<meta name="keywords" content="" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+		<script src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+		<style>
+			.profile {
+			  margin: 0 30px; // space(여백)/2
+			}
+			.profiles {
+			  margin: 0 -30px; // space(여백)/-2
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -158,7 +166,6 @@
 						<h2>Ante gravida elementum</h2>
 						<p>Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum lorem ipsum dolor sit amet consequat hendrerit tortor semper lorem at felis.</p>
 					</header>
-					<div class="slick-slider">
 					<div class="wrapper style3">
 					
 						<div class="inner">
@@ -209,7 +216,6 @@
 						</div><!--//inner-->
 						
 					</div><!--//wrapper style3-->
-					</div><!--//slick-slider-->
 					<footer>
 						<ul class="actions">
 							<li><a href="#" class="button">Learn More</a></li>
@@ -278,7 +284,7 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
+			
 			<script src="assets/js/jquery.dropotron.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
@@ -286,7 +292,7 @@
 			<script src="assets/js/main.js"></script>
 			
 			<script>
-			    $('.slick-slider').slick({
+			    $('.profiles').slick({
 			        slidesToShow: 3, // 보여질 슬라이드 수
 			        slidesToScroll: 1, // 넘겨질 슬라이드 수
 			        //infinite : true, //무한 반복 옵션

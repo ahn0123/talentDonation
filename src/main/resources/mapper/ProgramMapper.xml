@@ -5,7 +5,7 @@
 	<!-- 프로그램 랜덤 정보 가져오기 -->
     <select id="getProgramExampleRandom" resultType="com.talentDonation.dto.Program">
     	<![CDATA[
-    	select ROWNUM, A.* from (select * from program where prog_rsv_status=1 order by DBMS_RANDOM.RANDOM) A where ROWNUM<=3
+    	select ROWNUM, A.* from (select * from program where prog_rsv_status=1 order by DBMS_RANDOM.RANDOM) A where ROWNUM<=10
     	]]>
     </select>
 

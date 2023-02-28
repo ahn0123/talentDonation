@@ -10,6 +10,13 @@
 	<meta name="keywords" content="" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     
+    <!-- datepicker 달력  -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="../assets/js/datepicker-ko.js"></script>
+	<script src="../assets/js/datepicker-set.js"></script>
+    
 </head>
 <body class="is-preload">
 	<c:if test="${empty sessionId}">
@@ -42,7 +49,7 @@
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">생일</label>
-									<input name="dogBirthday" id="dogBirthday" type="text" />
+									<input class="datepicker inpType" name="dogBirthday" id="dogBirthday" type="text" />
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">무게</label>
@@ -72,7 +79,7 @@
 	<%@include file ="../footer.jsp" %>
 	
 <!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
+<!-- <script src="../assets/js/jquery.min.js"></script> -->
 <script src="../assets/js/jquery.dropotron.min.js"></script>
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
