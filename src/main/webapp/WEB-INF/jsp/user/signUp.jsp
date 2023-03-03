@@ -38,12 +38,15 @@
 								</div>								
 								<div class="field">
 									<input name="memName" id="memName" placeholder="이름" type="text" />
+									<p></p>
 								</div>
 								<div class="field">
 									<input name="memTel" id="memTel" placeholder="휴대폰 번호" type="text" />
+									<p></p>
 								</div>
 								<div class="field">
 									<input name="memEmail" id="memEmail" placeholder="이메일" type="email" />
+									<p></p>
 								</div>
 								<!-- <div class="field">
 									<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
@@ -59,6 +62,7 @@
 											<label for="optTrainer">트레이너</label>
 										</div>
 									</div>
+									<p></p>
 								</div>
 							</div>
 							<!-- 버튼영역 -->

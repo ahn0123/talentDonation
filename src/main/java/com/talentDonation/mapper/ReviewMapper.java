@@ -17,4 +17,6 @@ public interface ReviewMapper {
     public int reviewCount(int revProgId, int revDogId); //신청내용별 교육후기 카운트
     void addReview(Review review); //교육후기 등록
     void modifyReviewInfo(Review review); //교육후기 수정
+
+    public List<Review> getReviewExample(); //교육후기 정보 가져오기
 }

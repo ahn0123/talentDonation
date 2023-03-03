@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.talentDonation.mapper.ReviewMapper">
+
+	<!-- 교육후기 정보 가져오기 -->
+    <select id="getReviewExample" resultType="com.talentDonation.dto.Review">
+    	select * from (select ROWNUM, p.prog_title, r.rev_dog_id, r.rev_prog_id, r.rev_title, r.rev_content, avg(r.rev_rate)
+		from program p join review r on p.prog_id = r.rev_prog_id 
+		group by ROWNUM, p.prog_title, r.rev_dog_id, r.rev_prog_id, r.rev_title, r.rev_content 
+		order by avg(r.rev_rate) desc) where ROWNUM between 1 and 1
+    </select>
 	
 	<!-- 검색 조건문(교육후기 현황) -->
     <sql id="criteria_review">

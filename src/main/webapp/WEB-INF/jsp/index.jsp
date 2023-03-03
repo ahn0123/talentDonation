@@ -133,15 +133,19 @@
 				<div class="wrapper style2">
 					<div class="inner">
 						<div class="spotlights">
+							<c:forEach var="list2" items="${list2}">
 							<div class="intro">
 								<header>
-									<h2 class="left">Eu ligula<br /> consequat</h2>
-									<p>Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing.</p>
+									<h2 class="left" style="font-size:30px">${list2.progTitle}</h2>
+									<h2 class="left" style="font-size:20px">${list2.revTitle}</h2>
+									<p style="width:400px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; 
+										-webkit-line-clamp: 3; -webkit-box-orient: vertical; resize: none; height: 100px;">${list2.revContent}</p>
 								</header>
 								<ul class="actions">
-									<li><a href="#" class="button">Details</a></li>
+									<li><a href="review/reviewDetail?revProgId=${list2.revProgId}&revDogId=${list2.revDogId}" class="button">Details</a></li>
 								</ul>
 							</div>
+							</c:forEach>
 							<div class="spotlight">
 								<div class="image fit">
 									<img src="images/pic03.jpg" alt="" />
@@ -186,30 +190,6 @@
 										</ul>
 									</div>
 								</div>
-								<!-- <div class="profile">
-									<div class="image">
-										<img src="images/pic06.jpg" alt="" />
-									</div>
-									<div class="content">
-										<h3>Metus gravida</h3>
-										<p>Sed egestas, ante et vulputate volutpat pede semper est luctus metus eu augue. Morbi purus amet libero.</p>
-										<ul class="actions">
-											<li><a href="#" class="button small">More</a></li>
-										</ul>
-									</div>
-								</div>
-								<div class="profile">
-									<div class="image">
-										<img src="images/pic07.jpg" alt="" />
-									</div>
-									<div class="content">
-										<h3>Faucibus lorem</h3>
-										<p>Sed egestas, ante et vulputate volutpat pede semper est luctus metus eu augue. Morbi purus amet libero.</p>
-										<ul class="actions">
-											<li><a href="#" class="button small">More</a></li>
-										</ul>
-									</div>
-								</div> -->
 							</c:forEach>
 							</div><!--//profiles-->
 						
@@ -225,63 +205,7 @@
 			</div>
 
 		<!-- Footer -->
-			<div id="footer">
-				<div class="wrapper style2">
-					<div class="inner">
-						<header class="major">
-							<h2>Get in touch</h2>
-							<p>Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum lorem ipsum dolor sit amet consequat hendrerit tortor semper lorem at felis.</p>
-						</header>
-						<div class="content">
-							<div class="form">
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input name="name" id="name" placeholder="Name" type="text" />
-										</div>
-										<div class="field half">
-											<input name="email" id="email" placeholder="Email" type="email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
-										</div>
-									</div>
-									<ul class="actions special">
-										<li><input type="button" class="button" value="Send Message" /></li>
-									</ul>
-								</form>
-							</div>
-							<ul class="icons">
-								<li>
-									<span class="icon solid fa-home"></span>
-									<div>
-										<strong>Address</strong>
-										1234 Somewhere Road #543<br />
-										Nashville, TN 00000
-									</div>
-								</li>
-								<li>
-									<span class="icon solid fa-envelope"></span>
-									<div>
-										<strong>Email</strong>
-										<a href="mailto:information@domain.ext">information@domain.ext</a>
-									</div>
-								</li>
-								<li>
-									<span class="icon solid fa-phone"></span>
-									<div>
-										<strong>Phone</strong>
-										(000) 000-0000 ext 0000
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="copyright">
-						&copy; PTA. All rights reserved.
-					</div>
-				</div>
-			</div>
+			<%@include file ="footer.jsp" %>
 
 		<!-- Scripts -->
 			
@@ -292,6 +216,7 @@
 			<script src="assets/js/main.js"></script>
 			
 			<script>
+				// 프로그램 리스트 슬라이드
 			    $('.profiles').slick({
 			        slidesToShow: 3, // 보여질 슬라이드 수
 			        slidesToScroll: 1, // 넘겨질 슬라이드 수
@@ -302,31 +227,7 @@
 			        arrows: false, // next, prev 이동 버튼
 			        speed : 300 // 슬라이드 속도
 			        // dots: true
-			/*         responsive: [ // -> 반응형 옵션
-			        	{
-			        	      breakpoint: 1024, // 반응형 ~ 1024
-			        	      settings: {
-			        	        slidesToShow: 3,
-			        	        slidesToScroll: 3,
-			        	        infinite: true,
-			        	        dots: true
-			        	      }
-			        	    },
-			        	    {
-			        	      breakpoint: 600,// 반응형 ~ 600
-			        	      settings: {
-			        	        slidesToShow: 2,
-			        	        slidesToScroll: 2
-			        	      }
-			        	    },
-			        	    {
-			        	      breakpoint: 480,// 반응형 ~ 480
-			        	      settings: {
-			        	        slidesToShow: 1,
-			        	        slidesToScroll: 1
-			        	      }
-			        	    } */
-			      });
+			    });
 			</script>
 
 	</body>

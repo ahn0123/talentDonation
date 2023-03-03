@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.talentDonation.dto.Member;
 import com.talentDonation.mapper.ProgramMapper;
+import com.talentDonation.mapper.ReviewMapper;
 import com.talentDonation.mapper.UserMapper;
 import com.talentDonation.service.EncryptionService;
 import com.talentDonation.service.UserService;
@@ -37,18 +38,21 @@ public class HomeController {
 
 	private final UserMapper userMapper;
 	private final ProgramMapper programMapper;
+	private final ReviewMapper reviewMapper;
 	private final EncryptionService Encryption;
 	//private final UserService userService;
 
 	@GetMapping("/")
     public String main(Model model, HttpSession session) {
 		model.addAttribute("list", programMapper.getProgramExampleRandom()); // 프로그램 랜덤 정보 가져오기
+		model.addAttribute("list2", reviewMapper.getReviewExample()); // 교육후기 정보 가져오기
         return "index";
     }
 
 	@GetMapping("index")
 	public String index(Model model, HttpSession session) {
 		model.addAttribute("list", programMapper.getProgramExampleRandom()); // 프로그램 랜덤 정보 가져오기
+		model.addAttribute("list2", reviewMapper.getReviewExample()); // 교육후기 정보 가져오기
 		return "index";
 	}
 

@@ -9,6 +9,7 @@
     <meta name="description" content="" />
 	<meta name="keywords" content="" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/star.css" />
     
 </head>
 <body class="is-preload">
@@ -29,7 +30,7 @@
 				<br>
 				<div class="content"> <!-- start of content -->
 				    <div class="form">
-						<form method="post" action="/review/addReview" id="addReviewForm">
+						<form method="post" name="myform" action="/review/addReview" id="addReviewForm">
 							
 							<div class="fields">
 								<div class="field">
@@ -42,7 +43,22 @@
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">별점</label>
-									<input name="revRate" id="revRate" type="text" />																	
+									<!-- <input name="revRate" id="revRate" type="text" /> -->
+									<span class="star-input">
+										<span class="input">
+									    	<input type="radio" name="revRate" id="p1" value="1"><label for="p1">1</label>
+									    	<input type="radio" name="revRate" id="p2" value="2"><label for="p2">2</label>
+									    	<input type="radio" name="revRate" id="p3" value="3"><label for="p3">3</label>
+									    	<input type="radio" name="revRate" id="p4" value="4"><label for="p4">4</label>
+									    	<input type="radio" name="revRate" id="p5" value="5"><label for="p5">5</label>
+									    	<input type="radio" name="revRate" id="p6" value="6"><label for="p6">6</label>
+									    	<input type="radio" name="revRate" id="p7" value="7"><label for="p7">7</label>
+									    	<input type="radio" name="revRate" id="p8" value="8"><label for="p8">8</label>
+									    	<input type="radio" name="revRate" id="p9" value="9"><label for="p9">9</label>
+									    	<input type="radio" name="revRate" id="p10" value="10"><label for="p10">10</label>
+									  	</span>
+									  	<output for="star-input"><b>0</b>점</output>
+									</span>
 								</div>
 								<input type="hidden" name="revProgId" id="revProgId" value="${revProgId}" />
 								<input type="hidden" name="revDogId" id="revDogId" value="${revDogId}" />
@@ -80,7 +96,7 @@
 	
 			const revTitle = $("#revTitle").val().replaceAll(" ", "");
 			const revContent = $("#revContent").val().replaceAll(" ", "");
-			const revRate = $("#revRate").val().replaceAll(" ", "");
+			const revRate = $("input[name='revRate']:checked").val();
 	
 			if (!revTitle) {
 				$("#checking").text("제목을 입력하세요");
@@ -94,6 +110,39 @@
 	
 		})
 	})
+	
+	//star rating
+	var starRating = function(){
+	  var $star = $(".star-input"),
+	      $result = $star.find("output>b");
+	  $(document)
+	    .on("focusin", ".star-input>.input", function(){
+	    $(this).addClass("focus");
+	  })
+	    .on("focusout", ".star-input>.input", function(){
+	    var $this = $(this);
+	    setTimeout(function(){
+	      if($this.find(":focus").length === 0){
+	        $this.removeClass("focus");
+	      }
+	    }, 100);
+	  })
+	    .on("change", ".star-input :radio", function(){
+	    $result.text($(this).next().text());
+	  })
+	    .on("mouseover", ".star-input label", function(){
+	    $result.text($(this).text());
+	  })
+	    .on("mouseleave", ".star-input>.input", function(){
+	    var $checked = $star.find(":checked");
+	    if($checked.length === 0){
+	      $result.text("0");
+	    } else {
+	      $result.text($checked.next().text());
+	    }
+	  });
+	};
+	starRating();
 </script>
 
 </body>

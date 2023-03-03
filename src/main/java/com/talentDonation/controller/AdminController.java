@@ -86,7 +86,7 @@ public class AdminController {
     @PostMapping("/addProgram")
     public String addProgram(Model model, @ModelAttribute Program program) {
     	adminMapper.addProgram(program);
-        return "admin/addProgram";
+        return "redirect:/admin/programList";
     }
 
     // 트레이너 리스트 팝업

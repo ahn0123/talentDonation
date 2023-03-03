@@ -110,7 +110,7 @@ public class MyPageController {
     @PostMapping("/addDog")
     public String addDog(Model model, @ModelAttribute Dog dog) {
     	myPageMapper.addDog(dog);
-        return "myPage/addDog";
+        return "redirect:/myPage/dogList";
     }
 
     // 전체 반려견정보 가져오기
@@ -248,6 +248,6 @@ public class MyPageController {
     @PostMapping("/addRecord")
     public String addRecord(Model model, @ModelAttribute Record record) {
     	myPageMapper.addRecord(record);
-        return "myPage/addRecord";
+        return "redirect:/myPage/recordListTrainer";
     }
 }

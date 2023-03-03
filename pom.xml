@@ -11,6 +11,7 @@
 	<groupId>com.talentDonation</groupId>
 	<artifactId>talentDonation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>talentDonation</name>
 	<description>Talent Donation project for Spring Boot</description>
 	<properties>
