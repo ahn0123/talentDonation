@@ -14,4 +14,7 @@ public interface ProgramMapper {
 	int getApplyCount(int progId, int dogId); //프로그램 신청 중복 방지(count)
 
 	public List<Program> getProgramExampleRandom(); //프로그램 랜덤 정보 가져오기
+
+	int getProgStatus(int revProgId); //프로그램 교육현황 상태값 가져오기
+	int getApplyStatus(int revProgId, int revDogId); //교육신청 상태값 가져오기
 }

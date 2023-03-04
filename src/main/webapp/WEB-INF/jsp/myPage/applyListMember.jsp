@@ -11,6 +11,16 @@
 	<meta name="keywords" content="" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     
+<script>
+var isMessage = true;
+<c:if test="${!empty message}">
+if(isMessage){
+	 alert("${message}");
+	 isMessage = false;
+}
+</c:if>
+</script> 
+    
 </head>
 <body class="is-preload">
 	<c:if test="${empty sessionId}">

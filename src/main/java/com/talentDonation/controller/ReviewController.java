@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.talentDonation.dto.Criteria;
 import com.talentDonation.dto.PageMakerDTO;
 import com.talentDonation.dto.Review;
+import com.talentDonation.mapper.ProgramMapper;
 import com.talentDonation.mapper.ReviewMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReviewController {
 
 	private final ReviewMapper reviewMapper;
+	private final ProgramMapper programMapper;
 
 	// 전체 교육후기 정보 가져오기
 	@GetMapping("/reviewList")
@@ -47,14 +49,22 @@ public class ReviewController {
  	public String addReview(Model model, @RequestParam("revProgId") int revProgId, @RequestParam("revDogId") int revDogId,
  			RedirectAttributes re) {
  		int cnt = reviewMapper.reviewCount(revProgId, revDogId); //신청내용별 교육후기 카운트
- 		if (cnt == 0) {
+ 		int progStatus = programMapper.getProgStatus(revProgId); //프로그램 교육현황 상태값 가져오기
+ 		int applyStatus = programMapper.getApplyStatus(revProgId, revDogId); //교육신청 상태값 가져오기
+
+ 		if (cnt == 0 && progStatus == 1 && applyStatus == 1) {
  			model.addAttribute("revProgId", revProgId);
  			model.addAttribute("revDogId", revDogId);
  			return "review/addReview";
- 		} else {
+ 		} else if(cnt == 1 && progStatus == 1 && applyStatus == 1) {
  			re.addAttribute("revProgId", revProgId);
  			re.addAttribute("revDogId", revDogId);
  			return "redirect:/review/reviewDetail";
+ 		} else {
+ 			re.addAttribute("revProgId", revProgId);
+ 			re.addAttribute("revDogId", revDogId);
+ 			re.addFlashAttribute("message", "교육이 완료된 후 사용할 수 있습니다");
+ 			return "redirect:/myPage/applyListMember";
  		}
  	}
 

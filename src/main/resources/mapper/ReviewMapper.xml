@@ -55,7 +55,9 @@
     
     <!-- 교육후기 정보 상세보기 -->
     <select id="getReviewDetail" resultType="com.talentDonation.dto.Review">
-        select r.*, p.prog_title, d.dog_mem_id from review r join program p on r.rev_prog_id = p.prog_id join dog d on r.rev_dog_id = d.dog_id where rev_prog_id = #{revProgId} and rev_dog_id = #{revDogId}
+        select r.*, p.prog_title, d.dog_mem_id 
+		from review r join program p on r.rev_prog_id = p.prog_id join dog d on r.rev_dog_id = d.dog_id join apply a on p.prog_id = a.apply_prog_id 
+		where r.rev_prog_id = #{revProgId} and r.rev_dog_id = #{revDogId} and a.apply_status = 1 and p.prog_status = 1
     </select>
     
     <!-- 신청내용별 교육후기 카운트 -->

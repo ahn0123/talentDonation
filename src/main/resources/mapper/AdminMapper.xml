@@ -152,7 +152,8 @@
     <!-- 프로그램 정보 수정 -->
     <update id="modifyProgramInfo">
         update program
-		set prog_title=#{progTitle}, prog_location=#{progLocation}, prog_price=#{progPrice}, prog_recruit_num=#{progRecruitNum}, prog_content=#{progContent}, prog_due=#{progDue}, prog_start_date=#{progStartDate}, prog_end_date=#{progEndDate}            
+		set prog_title=#{progTitle}, prog_location=#{progLocation}, prog_price=#{progPrice}, prog_recruit_num=#{progRecruitNum}, 
+		prog_content=#{progContent}, prog_due=#{progDue}, prog_start_date=#{progStartDate}, prog_end_date=#{progEndDate}, prog_rsv_status=#{progRsvStatus}, prog_status=#{progStatus}
 		where prog_id = #{progId}
     </update>
     

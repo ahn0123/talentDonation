@@ -142,7 +142,7 @@
 										-webkit-line-clamp: 3; -webkit-box-orient: vertical; resize: none; height: 100px;">${list2.revContent}</p>
 								</header>
 								<ul class="actions">
-									<li><a href="review/reviewDetail?revProgId=${list2.revProgId}&revDogId=${list2.revDogId}" class="button">Details</a></li>
+									<li><a href="review/reviewDetail?revProgId=${list2.revProgId}&revDogId=${list2.revDogId}" class="button">상세보기</a></li>
 								</ul>
 							</div>
 							</c:forEach>

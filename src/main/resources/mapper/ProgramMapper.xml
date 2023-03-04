@@ -18,5 +18,15 @@
     <select id="getApplyCount" resultType="int">
         select count(*) from apply where apply_dog_id=#{dogId} and apply_prog_id=#{progId} and apply_status = 0
     </select>
+    
+    <!-- 프로그램 교육현황 상태값 가져오기 -->
+    <select id="getProgStatus" resultType="int">
+        select prog_status from program where prog_id=#{revProgId}
+    </select>
+    
+    <!-- 교육신청 상태값 가져오기 -->
+    <select id="getApplyStatus" resultType="int">
+        select apply_status from apply where apply_prog_id=#{revProgId} and apply_dog_id=#{revDogId}
+    </select>
 	
 </mapper>
