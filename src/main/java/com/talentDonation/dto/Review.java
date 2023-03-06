@@ -19,6 +19,7 @@ public class Review {
 	private String dogMemId;
 
 	private String progTitle;
+	private String progTrmemId;
 
 	private int rn;
 }

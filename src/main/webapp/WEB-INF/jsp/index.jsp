@@ -17,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 		<script src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> <!-- chart.js -->
 		<style>
 			.profile {
 			  margin: 0 30px; // space(여백)/2
@@ -102,33 +103,15 @@
 							<img src="images/pet02.jpg" alt="" />
 						</div>
 						<ul class="feature-icons">
-							<li><span class="icon solid fa-laptop"></span><span class="label">Magna aliquam</span></li>
-							<li><span class="icon solid fa-wifi"></span><span class="label">Etiam feugiat</span></li>
-							<li><span class="icon solid fa-cloud"></span><span class="label">Nisl adipiscing</span></li>
+							<li><a href="program/programApplyList"><span class="icon solid fa-laptop"></span><span class="label">교육과정</span></a></li>
+							<li><a href="myPage/recordListMember"><span class="icon solid fa-wifi"></span><span class="label">교육일지</span></a></li>
+							<li><a href="review/reviewList"><span class="icon solid fa-cloud"></span><span class="label">교육후기</span></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 
-		<!-- One -->
-			<div id="one">
-				<div class="wrapper special">
-					<div class="inner">
-						<header class="major">
-							<h2>Amet magna adipiscing</h2>
-						</header>
-						<div class="image fit special">
-							<img src="images/pic02.jpg" alt="" />
-						</div>
-						<p class="special">Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum lorem ipsum dolor sit amet consequat hendrerit tortor semper lorem at felis.</p>
-						<ul class="actions">
-							<li><a href="#" class="button">Details</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-		<!-- Two -->
+		<!-- review and chart -->
 			<div id="two">
 				<div class="wrapper style2">
 					<div class="inner">
@@ -147,28 +130,54 @@
 							</div>
 							</c:forEach>
 							<div class="spotlight">
-								<div class="image fit">
-									<img src="images/pic03.jpg" alt="" />
+								<div class="image fit" style="height:230px; background-color:white;">
+									<%-- <div class="box-left w33">
+									   <div class="list_type01">
+											<table>
+												<tr>
+													<th>구분</th>
+													<th>카운트</th>
+													<th>비율</th>
+												</tr>
+												<tr>
+													<td>일반회원</td>
+													<td>${memberCount}</td>
+													<td><div id="memberRate"></div></td>	
+												</tr>
+												<tr>
+													<td>트레이너</td>
+													<td>${trainerCount}</td>
+													<td><div id="trainerRate"></div></td>	
+												</tr>
+											</table>
+										</div>
+									</div> --%>
+									<div>
+										<canvas id="typeChart" style="height:230px;"></canvas>
+									</div>
 								</div>
-								<div class="content">Magna sed tempus</div>
+								<div class="content">회원유형 분석(가입자 수)</div>
 							</div>
 							<div class="spotlight">
-								<div class="image fit">
-									<img src="images/pic04.jpg" alt="" />
+								<div class="image fit" style="height:230px; background-color:white;">
+									<div>
+										<canvas id="typeChart2" style="height:230px;"></canvas>
+									</div>
 								</div>
-								<div class="content">Lorem ipsum dolor</div>
+								<div class="content">회원유형 분석(비율)</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-		<!-- Three -->
+		<!-- education program -->
 			<div id="three">
 				<div class="wrapper alt special">
 					<header class="major">
-						<h2>Ante gravida elementum</h2>
-						<p>Sed egestas, ante et vulputate volutpat pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum lorem ipsum dolor sit amet consequat hendrerit tortor semper lorem at felis.</p>
+						<h2>실시간 교육 프로그램</h2>
+						<p>현재 등록된 실시간 교육 프로그램을 신청해보세요. 반려견의 문제행동은 하루아침에 생긴 것이 아니고 매일 누적되어 생긴 것입니다. 반려견의 마음을 이해하여 함께 행복하게 살 수 있도록 하는 것이<br>
+						PTA(Pet Training Academy)의 목표입니다.</p>
 					</header>
 					<div class="wrapper style3">
 					
@@ -196,16 +205,89 @@
 						</div><!--//inner-->
 						
 					</div><!--//wrapper style3-->
-					<footer>
-						<ul class="actions">
-							<li><a href="#" class="button">Learn More</a></li>
-						</ul>
-					</footer>
 				</div>
 			</div>
-
-		<!-- Footer -->
-			<%@include file ="footer.jsp" %>
+			<!-- ranking top3-->
+			<div id="footer">
+				<div class="wrapper style2">
+					<div class="inner">
+						<header class="major">
+							<h2>인기 교육 프로그램 및 리뷰</h2>
+							<p>상위 TOP3 인기 교육 프로그램과 인기 트레이너 강사를 실시간으로 확인할 수 있습니다.<br>또한 교육 프로그램에 대한 인기 리뷰를 통해 교육 정보를 간접적으로 체험할 수 있습니다.</p>
+						</header>
+						<div class="content">
+							<div class="form">
+								<!-- <form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input name="name" id="name" placeholder="Name" type="text" />
+										</div>
+										<div class="field half">
+											<input name="email" id="email" placeholder="Email" type="email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions special">
+										<li><input type="button" class="button" value="Send Message" /></li>
+									</ul>
+								</form> -->
+								<div class="table-wrapper">
+									<table>
+									<p style="text-align:center;color:black;font-size:24px"><b>인기 교육과정 랭킹 순위 </b><br>
+										<thead>
+											<tr>
+												<th style="text-align:center;">랭킹</th>
+												<th style="text-align:center;">교육과정명</th>
+												<th style="text-align:center;">트레이너명</th>												
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="list3" items="${list3}">
+											<tr>
+												<td style="text-align:center;color:black">${list3.rn}</td>
+												<td style="text-align:center;color:black">${list3.progTitle}</a></td>
+												<td style="text-align:center;color:black">${list3.progTrmemId}</td>														
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div> <!-- end of Table -->
+							</div>
+							<ul class="icons">
+							<c:forEach var="list3" items="${list3}">
+								<li>
+									<span class="icon solid fa-home"></span>
+									<div>
+										<strong>${list3.revTitle}</strong>
+										<a href="review/reviewDetail?revProgId=${list3.revProgId}&revDogId=${list3.revDogId}" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; 
+										-webkit-line-clamp: 3; -webkit-box-orient: vertical; resize: none; height: 100px;">${list3.revContent}</a>
+									</div>
+								</li>
+							</c:forEach>	
+								<!-- <li>
+									<span class="icon solid fa-envelope"></span>
+									<div>
+										<strong>Email</strong>
+										<a href="mailto:information@domain.ext">information@domain.ext</a>
+									</div>
+								</li>
+								<li>
+									<span class="icon solid fa-phone"></span>
+									<div>
+										<strong>Phone</strong>
+										(000) 000-0000 ext 0000
+									</div>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="copyright">
+						&copy; PTA. All rights reserved.
+					</div>
+				</div>
+			</div>
 
 		<!-- Scripts -->
 			
@@ -228,6 +310,138 @@
 			        speed : 300 // 슬라이드 속도
 			        // dots: true
 			    });
+				
+				// 차트1
+			    var ctx = document.getElementById('typeChart');
+			    var a = '<c:out value="${memberCount}"/>';
+			    var b = '<c:out value="${trainerCount}"/>';
+			    
+			    var myChart = new Chart(ctx, {
+			      type: 'bar',
+			      data: {
+			        labels: ['일반회원', '트레이너'],
+			        datasets: [{
+			          label: '회원유형',
+			          data: [a, b],
+			          backgroundColor: [
+			            'rgba(255, 99, 132, 0.2)',
+			            'rgba(54, 162, 235, 0.2)',
+			          ],
+			          borderColor: [
+			            'rgba(255, 99, 132, 1)',
+			            'rgba(54, 162, 235, 1)',
+			          ],
+			          borderWidth: 1,     
+			          
+			        }]
+			      },
+			      options: {    	 
+			          scales: {
+			            yAxes: [{
+			              ticks: {
+			                beginAtZero: true
+			              }
+			            }]
+			          },
+			          legend: {
+			              display: true,
+			              position : 'right'
+			            },
+			          title : {
+			        	  display: true,
+			        	  text : '회원유형 분석 통계'
+			          }
+			        }
+			      });
+			    
+			    // 차트2
+			    var ctx = document.getElementById('typeChart2');
+			    var a = '<c:out value="${memberCount}"/>';
+			    var b = '<c:out value="${trainerCount}"/>';
+			    
+			    var myPieChart = new Chart(ctx, {
+			      type: 'doughnut',
+			      data: {
+			        labels: ['일반회원', '트레이너'],
+			        datasets: [{
+			          label: '회원유형',
+			          data: [a, b],
+			          backgroundColor: [
+			            'rgba(255, 99, 132, 0.2)',
+			            'rgba(54, 162, 235, 0.2)',
+			          ],
+			          hoverBackgroundColor: [
+			            'rgba(255, 99, 132, 1)',
+			            'rgba(54, 162, 235, 1)',
+			          ],
+			          hoverBorderColor: 'rgba(234, 236, 244, 1)',
+			          
+			          datalabels: {
+			              labels: {
+			                  value: {
+			                      borderWidth: 2,
+			                      borderRadius: 4,
+			                      font: {size: 15},
+			                      formatter: function(value, ctx) {
+			                          var value = ctx.dataset.data[ctx.dataIndex];
+			                          return value > 0 ? Math.round(value / (ctx.dataset.data[0] + ctx.dataset.data[1]) * 100) + ' %' : null;
+			                      },
+			                      color: function(ctx) {
+			                          var value = ctx.dataset.data[ctx.dataIndex];
+			                          return value > 0 ? 'white' : null;
+			                      },
+			                      backgroundColor:function(ctx) {
+			                          var value = ctx.dataset.data[ctx.dataIndex];
+			                          return value > 0 ? 'gray' : null;
+			                      },
+			                      padding: 4
+			                  }
+			              }
+			          }
+			        }]
+			      },
+			      options: {
+			          maintainAspectRatio: false,
+			          responsive: true,
+			          animation: false,
+			          tooltips: {
+			            backgroundColor: "rgb(255,255,255)",
+			            bodyFontColor: "#858796",
+			            borderColor: '#dddfeb',
+			            borderWidth: 1,
+			            xPadding: 15,
+			            yPadding: 15,
+			            displayColors: false,
+			            caretPadding: 10,
+			          },
+			          legend: {
+			            display: true,
+			          },
+			          cutoutPercentage: 40,
+			        },
+			      });
+			    
+			 	// 회원유형 백분율 구하기
+			    var memberRate = Number(a) *100 /(Number(a) + Number(b));
+			    var trainerRate = Number(b) *100 /(Number(a) + Number(b)); 
+
+			    if (isNaN(memberRate)) { // 값이 없어서 NaN값이 나올 경우
+
+			    	memberRate = 0;
+
+			    	}
+			    
+			    if (isNaN(trainerRate)) { // 값이 없어서 NaN값이 나올 경우
+
+			    	trainerRate = 0;
+
+			    	}    
+			    
+			    var memberRateRound = Math.round(memberRate) + "%";
+			    var trainerRateRound = Math.round(trainerRate) + "%";
+			    
+			    document.getElementById('memberRate').innerHTML = memberRateRound;
+			    document.getElementById('trainerRate').innerHTML = trainerRateRound;
 			</script>
 
 	</body>

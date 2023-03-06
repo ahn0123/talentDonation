@@ -62,11 +62,10 @@
 									<label style="text-align: left; color:cornflowerblue">처리상태</label>
 									<!-- Select영역 -->
 									<select name="applyStatus" id="applyStatus">
-										<option value="" selected disabled>- 선택 -</option>
-										<option value="0">대기</option>
-										<option value="1">승인</option>
-										<option value="-1">반려</option>
-										<option value="-2">취소</option>
+										<option value="0" <c:if test ="${list.applyStatus eq 0}">selected="selected"</c:if>>대기</option>
+										<option value="1" <c:if test ="${list.applyStatus eq 1}">selected="selected"</c:if>>승인</option>
+										<option value="-1" <c:if test ="${list.applyStatus eq -1}">selected="selected"</c:if>>반려</option>
+										<option value="-2" <c:if test ="${list.applyStatus eq -2}">selected="selected"</c:if>>취소</option>
 									</select>
 								</div>
 								<input type="hidden" id="applyProgId" name="applyProgId" value="${list.applyProgId}">

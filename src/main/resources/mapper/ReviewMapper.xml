@@ -76,5 +76,14 @@
         set rev_title = #{revTitle}, rev_content = #{revContent} 
         where rev_prog_id = #{revProgId} and rev_dog_id = #{revDogId}
     </update>
+    
+    <!-- 리뷰 랭킹 TOP3 가져오기 -->
+    <select id="getReviewTop3" resultType="com.talentDonation.dto.Review">    
+        select ROWNUM as rn, A.* from (select r.rev_prog_id, avg(r.rev_rate), p.prog_title, p.prog_content, p.prog_trmem_id, r.rev_title, r.rev_content, r.rev_dog_id
+		from review r join program p on r.rev_prog_id = p.prog_id
+		group by r.rev_prog_id, p.prog_title, p.prog_content, p.prog_trmem_id, r.rev_title, r.rev_content, r.rev_dog_id
+		order by avg(r.rev_rate) desc) A
+		where ROWNUM between 1 and 3	
+    </select>
 	
 </mapper>

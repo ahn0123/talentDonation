@@ -46,4 +46,14 @@
         where mem_id = #{memId}
     </update>
     
+    <!-- 통계 일반회원 카운트 가져오기 -->
+    <select id="getMemberCount" resultType="int">
+        select count(*) from member where mem_type = 1
+    </select>
+    
+    <!-- 통계 트레이너 카운트 가져오기 -->
+    <select id="getTrainerCount" resultType="int">
+        select count(*) from member where mem_type = 2
+    </select>
+    
 </mapper>

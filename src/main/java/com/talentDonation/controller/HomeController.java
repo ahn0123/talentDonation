@@ -46,6 +46,9 @@ public class HomeController {
     public String main(Model model, HttpSession session) {
 		model.addAttribute("list", programMapper.getProgramExampleRandom()); // 프로그램 랜덤 정보 가져오기
 		model.addAttribute("list2", reviewMapper.getReviewExample()); // 교육후기 정보 가져오기
+		model.addAttribute("list3", reviewMapper.getReviewTop3()); // 리뷰 랭킹 TOP3 가져오기
+		model.addAttribute("memberCount", userMapper.getMemberCount()); // 통계 일반회원 카운트 가져오기
+		model.addAttribute("trainerCount", userMapper.getTrainerCount()); // 통계 트레이너 카운트 가져오기
         return "index";
     }
 
@@ -53,6 +56,9 @@ public class HomeController {
 	public String index(Model model, HttpSession session) {
 		model.addAttribute("list", programMapper.getProgramExampleRandom()); // 프로그램 랜덤 정보 가져오기
 		model.addAttribute("list2", reviewMapper.getReviewExample()); // 교육후기 정보 가져오기
+		model.addAttribute("list3", reviewMapper.getReviewTop3()); // 리뷰 랭킹 TOP3 가져오기
+		model.addAttribute("memberCount", userMapper.getMemberCount()); // 통계 일반회원 카운트 가져오기
+		model.addAttribute("trainerCount", userMapper.getTrainerCount()); // 통계 트레이너 카운트 가져오기
 		return "index";
 	}
 

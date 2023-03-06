@@ -19,4 +19,6 @@ public interface ReviewMapper {
     void modifyReviewInfo(Review review); //교육후기 수정
 
     public List<Review> getReviewExample(); //교육후기 정보 가져오기
+
+    public List<Review> getReviewTop3(); //리뷰 랭킹 TOP3 가져오기
 }

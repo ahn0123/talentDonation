@@ -15,7 +15,8 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="../assets/js/datepicker-ko.js"></script>
-	<script src="../assets/js/datepicker-set.js"></script>
+	<!-- <script src="../assets/js/datepicker-set.js"></script> -->
+	<script src="../assets/js/datepicker.js"></script>
     
 </head>
 <body class="is-preload">
@@ -115,6 +116,10 @@
 	
 		})
 	})
+	
+	$("#dogBirthday").datepicker({
+    	language: 'ko'
+    });
 </script>
 
 </body>

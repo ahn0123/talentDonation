@@ -80,19 +80,17 @@
 									<label style="text-align: left; color:cornflowerblue">모집상태</label>
 									<!-- Select영역 -->
 									<select name="progRsvStatus" id="progRsvStatus">
-										<option value="" selected disabled>- 선택 -</option>
-										<option value="1">모집</option>
-										<option value="-1">마감</option>
+										<option value="1" <c:if test ="${list.progRsvStatus eq 1}">selected="selected"</c:if>>모집</option>
+										<option value="-1" <c:if test ="${list.progRsvStatus eq -1}">selected="selected"</c:if>>마감</option>
 									</select>
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">교육상태</label>
 									<!-- Select영역 -->
 									<select name="progStatus" id="progStatus">
-										<option value="" selected disabled>- 선택 -</option>
-										<option value="0">교육예정</option>
-										<option value="1">교육완료</option>
-										<option value="-1">교육취소</option>
+										<option value="0" <c:if test ="${list.progStatus eq 0}">selected="selected"</c:if>>교육예정</option>
+										<option value="1" <c:if test ="${list.progStatus eq 1}">selected="selected"</c:if>>교육완료</option>
+										<option value="-1" <c:if test ="${list.progStatus eq -1}">selected="selected"</c:if>>교육취소</option>
 									</select>
 								</div>
 								<input type="hidden" id="progId" name="progId" value="${list.progId}">

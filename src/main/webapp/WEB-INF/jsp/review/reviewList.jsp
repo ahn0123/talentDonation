@@ -13,12 +13,6 @@
     
 </head>
 <body class="is-preload">
-	<c:if test="${empty sessionId}">
-		<script>
-			alert("로그인을 진행해주세요");
-			location.href = "<%=request.getContextPath()%>/login";
-		</script>
-	</c:if>
 	<!-- Header -->
 	<%@include file ="../header.jsp" %>
 	<div id="main">
