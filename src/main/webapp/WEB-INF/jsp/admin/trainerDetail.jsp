@@ -70,13 +70,17 @@
 									</div>
 								</div>
 							</div>
-							</c:forEach>
 							<!-- 버튼영역 -->
 							<ul class="actions special">
+								<c:if test="${list.trCareer == null && list.trLicense == null}">
 								<li><input type="button" value="등록" class="button primary" id="addTrainer_btn"></li>
+								</c:if>
+								<c:if test="${list.trCareer != null && list.trLicense != null}">
 								<li><input type="button" value="수정" class="button primary" id="editTrainer_btn"></li>
+								</c:if>
 								<li><input type="button" value="목록가기" class="button" onclick="location.href='trainerList'"></li>
 							</ul>
+							</c:forEach>
 							<p id="checking" style="height: 1px; color: #13a2dd; text-align: center;" ></p>
 						</form>
 					</div>
@@ -124,6 +128,14 @@
 		var trCareer = document.getElementById('trCareer').value;
 		var trLicense = document.getElementById('trLicense').value;
 		
+		if (!trCareer) {
+			alert("먼저 경력/자격증을 등록을 해주세요");
+			location.href = "/admin/trainerDetail?memId=" + memId;
+		} else if (!trLicense) {
+			alert("먼저 경력/자격증을 등록을 해주세요");
+			location.href = "/admin/trainerDetail?memId=" + memId;
+		} 
+		
 		var param = {
 			memId: memId,
 			trCareer: trCareer,
@@ -137,6 +149,7 @@
 			 
 			success : function(result) {
 				alert("성공적으로 수정되었습니다");	
+				location.href = "/admin/trainerList";
 			},		
 			error : function(result) {
 				alert("오류가 발생했습니다");	

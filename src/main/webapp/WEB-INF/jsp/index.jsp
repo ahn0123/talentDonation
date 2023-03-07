@@ -247,7 +247,7 @@
 											<c:forEach var="list3" items="${list3}">
 											<tr>
 												<td style="text-align:center;color:black">${list3.rn}</td>
-												<td style="text-align:center;color:black">${list3.progTitle}</a></td>
+												<td style="text-align:center;color:black">${list3.progTitle}</td>
 												<td style="text-align:center;color:black">${list3.progTrmemId}</td>														
 											</tr>
 											</c:forEach>
@@ -321,7 +321,7 @@
 			      data: {
 			        labels: ['일반회원', '트레이너'],
 			        datasets: [{
-			          label: '회원유형',
+			          /* label: '회원유형', */
 			          data: [a, b],
 			          backgroundColor: [
 			            'rgba(255, 99, 132, 0.2)',
@@ -344,7 +344,7 @@
 			            }]
 			          },
 			          legend: {
-			              display: true,
+			              display: false,
 			              position : 'right'
 			            },
 			          title : {
