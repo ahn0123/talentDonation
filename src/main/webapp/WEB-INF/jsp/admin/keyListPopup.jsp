@@ -19,31 +19,10 @@
 		</script>
 	</c:if>
 	<div class="sub_box">
-		<!-- 검색영역 START -->
-		<form id="searchForm">
-		<div class="searchArea">											
-		<table>
-			<tr style="border: 0px;background-color:white;boder-color:white">
-				<td>					
-				<select name="type" class="se_type01" style="width:150px" >
-                        <option value="" ${pageMaker.cri.type == null ? 'selected' : ''}>검색 기준</option>
-                        <option value="I" ${pageMaker.cri.type == 'I' ? 'selected' : ''}>아이디</option>
-                        <option value="N" ${pageMaker.cri.type == 'N' ? 'selected' : ''}>이름</option>
-                        <option value="E" ${pageMaker.cri.type == 'E' ? 'selected' : ''}>이메일</option>
-                </select>       	
-	        	</td>
-	        	<td>
-				<input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword }" style="width:450px">
-				</td>
-				<td>							
-				<a href="javascript:void(0)"><button type="button" class="button primary icon solid fa-search">조회</button></a>													
-				</td>
-			</tr>
-		</table>		
-        </div>						
-		</form>
-		<!-- 검색영역 END -->
-		
+		<header class="major">
+			<h2>키워드 리스트</h2>
+		</header>
+		<br>
 		<div class="list_type01">
 			<table>
 				<colspan>

@@ -19,6 +19,14 @@ if(isMessage){
 	 isMessage = false;
 }
 </c:if>
+
+var isMessage2 = true;
+<c:if test="${!empty recordMessage}">
+if(isMessage2){
+	 alert("${recordMessage}");
+	 isMessage2 = false;
+}
+</c:if>
 </script> 
     
 </head>
@@ -110,6 +118,7 @@ if(isMessage){
 					</div> <!-- end of Table -->
 					
 					<!--  페이징 시작 -->
+					<ul class="actions special">
 					<div class="pageInfo_wrap">
 					    <div class="paging">
 					        <ul id="pageInfo" class="pageInfo">
@@ -138,7 +147,7 @@ if(isMessage){
 					        </ul> 
 					    </div>
 					</div> 
-					
+					</ul>
 					<form id="moveForm" method="get">
 					    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">

@@ -32,8 +32,8 @@ public class ProgramController {
 	// 전체 프로그램 정보 가져오기
  	@GetMapping("/programApplyList")
  	public String programApplyList(Model model, Criteria cri) {
- 		model.addAttribute("list", adminMapper.getProgramList(cri)); //프로그램 정보 가져오기
- 		int total = adminMapper.getProgramAdminTotal(cri); //프로그램 총 개수
+ 		model.addAttribute("list", programMapper.getProgramApplyList(cri)); //프로그램 정보 가져오기
+ 		int total = programMapper.getProgramTotal(cri); //프로그램 총 개수
  		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
  		model.addAttribute("pageMaker", pageMake);
  		return "program/programApplyList";

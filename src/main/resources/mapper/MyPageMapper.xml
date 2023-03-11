@@ -63,15 +63,15 @@
     
     <!-- 신청현황 정보 가져오기(일반회원) -->
     <select id="getApplyListMember" parameterType="map" resultType="com.talentDonation.dto.Apply">        
-        select * from (select A.* from (select rownum as rn, p.prog_title, m.mem_name, (select mem_type from member where mem_id = d.dog_mem_id) mem_type, d.dog_name, d.dog_mem_id, p.prog_location, a.* 
+        select rownum as rn, B.* from (select A.* from (select p.prog_title, m.mem_name, (select mem_type from member where mem_id = d.dog_mem_id) mem_type, d.dog_name, d.dog_mem_id, p.prog_location, a.* 
 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on p.prog_trmem_id = m.mem_id
 		where dog_mem_id = #{memId} ) A 
 		<if test="cri.keyword != null">
            <include refid="criteria_applyMember"></include>
-        </if>         
+        </if>
+        order by apply_date desc   
         ) B
-        where rn between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})        
-        order by apply_date desc       
+        where rownum between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})      
     </select>
     
     <!-- 신청현황 총 개수(일반회원) -->
@@ -93,15 +93,15 @@
     
    <!-- 신청현황 정보 가져오기(트레이너) -->
     <select id="getApplyListTrainer" parameterType="list" resultType="com.talentDonation.dto.Apply">
-        select * from (select A.* from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, (select mem_type from member where mem_id = p.prog_trmem_id) mem_type, p.prog_title, p.prog_trmem_id,d.dog_name, p.prog_location 
+        select rownum as rn, B.* from (select A.* from (select a.*, m.mem_id, m.mem_name, m.mem_tel, (select mem_type from member where mem_id = p.prog_trmem_id) mem_type, p.prog_title, p.prog_trmem_id,d.dog_name, p.prog_location 
 		from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
  		where prog_trmem_id = #{memId} ) A
         <if test="cri.keyword != null">
            <include refid="criteria_applyMember"></include>
-        </if>        
-        ) B
-        where rn between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})        
+        </if>
         order by apply_date desc
+        ) B
+        where rownum between ((nvl(#{cri.pageNum},0)-1)*#{cri.amount})+1 and (nvl(#{cri.pageNum},0)*#{cri.amount})        
     </select>
     
     <!-- 신청현황 총 개수(트레이너) -->

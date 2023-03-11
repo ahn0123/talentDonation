@@ -128,7 +128,7 @@
     
     <!-- 프로그램 정보 가져오기 -->
     <select id="getProgramList" parameterType="list" resultType="com.talentDonation.dto.Program">
-        select * from (select rownum as rn, p.*, m.mem_name from program p join member m on p.prog_trmem_id = m.mem_id where prog_status in(0, 1)
+        select * from (select rownum as rn, p.*, m.mem_name from program p join member m on p.prog_trmem_id = m.mem_id where prog_status in(0, 1, -1)
         <if test="keyword != null">
            <include refid="criteria_program"></include>
         </if>        
@@ -150,10 +150,22 @@
     </select>
     
     <!-- 프로그램 정보 수정 -->
-    <update id="modifyProgramInfo">
+    <!-- <update id="modifyProgramInfo">
         update program
 		set prog_title=#{progTitle}, prog_location=#{progLocation}, prog_price=#{progPrice}, prog_recruit_num=#{progRecruitNum}, 
 		prog_content=#{progContent}, prog_due=#{progDue}, prog_start_date=#{progStartDate}, prog_end_date=#{progEndDate}, prog_rsv_status=#{progRsvStatus}, prog_status=#{progStatus}
+		where prog_id = #{progId}
+    </update> -->
+    <update id="modifyProgramInfo">
+        update program
+		set prog_title=#{progTitle}, prog_location=#{progLocation}, prog_price=#{progPrice}, prog_recruit_num=#{progRecruitNum}, 
+		prog_content=#{progContent}, prog_due=#{progDue}, prog_start_date=#{progStartDate}, prog_end_date=#{progEndDate}, prog_status=#{progStatus},
+		prog_rsv_status=
+		case 
+			when #{progStatus} = 1 then -1
+            when #{progStatus} = -1 then -1
+            when #{progStatus} = 0 then 1
+        end		
 		where prog_id = #{progId}
     </update>
     
@@ -189,13 +201,13 @@
     
     <!-- 신청 정보 가져오기 -->
     <select id="getApplyListAdmin" parameterType="list" resultType="com.talentDonation.dto.Apply">
-        select * from (select rownum as rn, a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
+        select rownum as rn, T1.* from (select a.*, m.mem_id, m.mem_name, m.mem_tel, p.prog_title, p.prog_trmem_id from apply a join program p on a.apply_prog_id = p.prog_id join dog d on a.apply_dog_id = d.dog_id join member m on d.dog_mem_id = m.mem_id
         <if test="keyword != null">
            <include refid="criteria_apply"></include>
-        </if>        
-        ) T1
-        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})
+        </if>
         order by apply_date desc
+        ) T1
+        where rownum between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})
     </select>
     
     <!-- 신청 총 개수 -->

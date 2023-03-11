@@ -62,6 +62,7 @@
 									<th style="text-align:center;">교육과정명</th>
 									<th style="text-align:center;">트레이너명</th>
 									<th style="text-align:center;">장소</th>
+									<th style="text-align:center;">교육상태</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -70,7 +71,12 @@
 									<td style="text-align:center;">${list.rn}</td>
 									<td style="text-align:center;"><a href="programDetail?progId=${list.progId}">${list.progTitle}</a></td>
 									<td style="text-align:center;">${list.memName}</td>
-									<td style="text-align:center;">${list.progLocation}</td>			
+									<td style="text-align:center;">${list.progLocation}</td>
+									<td style="text-align:center;">
+										<c:if test ="${list.progStatus eq 0}">교육예정</c:if>
+										<c:if test ="${list.progStatus eq 1}">교육완료</c:if>
+										<c:if test ="${list.progStatus eq -1}">교육취소</c:if>
+									</td>		
 								</tr>
 								</c:forEach>
 							</tbody>
@@ -78,6 +84,7 @@
 					</div> <!-- end of Table -->
 					
 					<!--  페이징 시작 -->
+					<ul class="actions special">
 					<div class="pageInfo_wrap">
 					    <div class="paging">
 					        <ul id="pageInfo" class="pageInfo">
@@ -106,7 +113,7 @@
 					        </ul> 
 					    </div>
 					</div> 
-					
+					</ul>
 					<form id="moveForm" method="get">
 					    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">

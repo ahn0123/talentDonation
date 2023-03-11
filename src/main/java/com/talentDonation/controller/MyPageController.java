@@ -197,9 +197,19 @@ public class MyPageController {
 
   	// 교육일지 상세정보(일반회원)
    	@GetMapping("/recordDetailMember")
-   	public String recordDetailMember(Model model, @RequestParam("rcProgId") int rcProgId, @RequestParam("rcDogId") int rcDogId) {
-   		model.addAttribute("list", myPageMapper.getRecordDetailMember(rcProgId, rcDogId)); //교육일지 상세정보(일반회원)
-   		return "myPage/recordDetailMember";
+   	public String recordDetailMember(Model model, @RequestParam("rcProgId") int rcProgId, @RequestParam("rcDogId") int rcDogId, RedirectAttributes re) {
+   		int cnt = myPageMapper.recordCount(rcProgId, rcDogId); //신청내용별 교육일지 카운트
+
+   		if (cnt == 1) {
+   			model.addAttribute("list", myPageMapper.getRecordDetailMember(rcProgId, rcDogId)); //교육일지 상세정보(일반회원)
+   			return "myPage/recordDetailMember";
+   		} else {
+   			re.addAttribute("rcProgId", rcProgId);
+   			re.addAttribute("rcDogId", rcDogId);
+ 			re.addFlashAttribute("recordMessage", "현재 등록된 교육일지가 없습니다");
+ 			return "redirect:/myPage/applyListMember";
+   		}
+
    	}
 
   	// 교육일지 정보 가져오기(트레이너)

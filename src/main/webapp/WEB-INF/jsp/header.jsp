@@ -46,15 +46,6 @@
 						<li><a href="/admin/trainerList">트레이너목록 관리</a></li>
 						<li><a href="/admin/programList">교육목록 관리</a></li>
 						<li><a href="/admin/keywordList">키워드목록 관리</a></li>
-						<li>
-							<a href="#">Submenu</a>
-							<ul>
-								<li><a href="#">Option One</a></li>
-								<li><a href="#">Option Two</a></li>
-								<li><a href="#">Option Three</a></li>
-								<li><a href="#">Option Four</a></li>
-							</ul>
-						</li>
 					</ul>                
                 </li>
                 </c:if>			

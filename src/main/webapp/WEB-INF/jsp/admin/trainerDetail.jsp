@@ -129,10 +129,10 @@
 		var trLicense = document.getElementById('trLicense').value;
 		
 		if (!trCareer) {
-			alert("먼저 경력/자격증을 등록을 해주세요");
+			alert("먼저 경력/자격증 등록을 해주세요");
 			location.href = "/admin/trainerDetail?memId=" + memId;
 		} else if (!trLicense) {
-			alert("먼저 경력/자격증을 등록을 해주세요");
+			alert("먼저 경력/자격증 등록을 해주세요");
 			location.href = "/admin/trainerDetail?memId=" + memId;
 		} 
 		

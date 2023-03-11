@@ -28,5 +28,46 @@
     <select id="getApplyStatus" resultType="int">
         select apply_status from apply where apply_prog_id=#{revProgId} and apply_dog_id=#{revDogId}
     </select>
+    
+    <!-- 검색 조건문(프로그램 현황) -->
+    <sql id="criteria_program">
+        <if test="type != null and keyword != null">
+            <trim prefix="and" suffix="" prefixOverrides="OR">
+                <foreach item="type" collection="typeArr">
+                    <trim prefix="OR">
+                        <choose>
+                        	<when test="type == 'P'.toString()">
+                                p.prog_title LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'T'.toString()">
+                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                            </when>
+                            <when test="type == 'L'.toString()">
+                                p.prog_location LIKE '%'|| #{keyword} ||'%'
+                            </when>                            
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    
+    <!-- 프로그램 정보 가져오기 -->
+    <select id="getProgramApplyList" parameterType="list" resultType="com.talentDonation.dto.Program">
+        select * from (select rownum as rn, p.*, m.mem_name from program p join member m on p.prog_trmem_id = m.mem_id where prog_status = 0
+        <if test="keyword != null">
+           <include refid="criteria_program"></include>
+        </if>        
+        ) T1
+        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount}) 
+    </select>
+    
+    <!-- 프로그램 총 개수 -->
+    <select id="getProgramTotal" resultType="int">
+        select count(*) from program p join member m on p.prog_trmem_id = m.mem_id where 1=1
+        <if test="keyword != null">
+            <include refid="criteria_program"></include>
+        </if>
+    </select>
 	
 </mapper>

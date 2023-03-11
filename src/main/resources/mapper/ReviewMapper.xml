@@ -35,13 +35,14 @@
     
 	<!-- 교육후기 정보 가져오기 -->
     <select id="getReviewList" parameterType="list" resultType="com.talentDonation.dto.Review">
-        select * from (select rownum as rn, r.*, p.prog_title, d.dog_mem_id 
+        select rownum as rn, T1.* from (select r.*, p.prog_title, d.dog_mem_id 
         from review r join program p on r.rev_prog_id = p.prog_id join dog d on r.rev_dog_id = d.dog_id
         <if test="keyword != null">
            <include refid="criteria_review"></include>
-        </if>        
+        </if>
+        order by r.rev_reg_date desc 
         ) T1
-        where rn between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})   
+        where rownum between ((nvl(#{pageNum},0)-1)*#{amount})+1 and (nvl(#{pageNum},0)*#{amount})   
     </select>
     
     <!-- 교육후기 총 개수 -->

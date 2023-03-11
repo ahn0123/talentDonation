@@ -16,7 +16,8 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="../assets/js/datepicker-ko.js"></script>
-	<script src="../assets/js/datepicker-set.js"></script>
+	<!-- <script src="../assets/js/datepicker-set.js"></script> -->
+	<script src="../assets/js/datepicker.js"></script>
     
 </head>
 <body class="is-preload">
@@ -179,6 +180,18 @@
 	function keyNamePopup(){
 		var spop = window.open("keyListPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
+	
+	$("#progDue").datepicker({
+    	language: 'ko'
+    });
+	
+	$("#progStartDate").datepicker({
+    	language: 'ko'
+    });
+	
+	$("#progEndDate").datepicker({
+    	language: 'ko'
+    });
 </script>
 
 </body>

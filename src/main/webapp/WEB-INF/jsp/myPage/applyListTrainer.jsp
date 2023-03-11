@@ -91,7 +91,12 @@
 									<td style="text-align:center;">취소</td>
 									</c:if>
 									<%-- <td style="text-align:center;"><a href="/myPage/recordDetailTrainer?rcProgId=${list.applyProgId}&rcDogId=${list.applyDogId}" class="button small">교육일지</a></td> --%>
+									<c:if test="${list.applyStatus == 0 || list.applyStatus == -1 || list.applyStatus == -2}">
+									<td style="text-align:center;"><a href="#" class="button small" onClick="alert('승인되지 않은 상태에서 교육일지를 작성할 수 없습니다')">교육일지</a></td>
+									</c:if>
+									<c:if test="${list.applyStatus == 1}">
 									<td style="text-align:center;"><a href="/myPage/addRecord?rcProgId=${list.applyProgId}&rcDogId=${list.applyDogId}" class="button small">교육일지</a></td>
+									</c:if>
 								</tr>
 								</c:forEach>
 							</tbody>
@@ -99,6 +104,7 @@
 					</div> <!-- end of Table -->
 					
 					<!--  페이징 시작 -->
+					<ul class="actions special">
 					<div class="pageInfo_wrap">
 					    <div class="paging">
 					        <ul id="pageInfo" class="pageInfo">
@@ -127,7 +133,7 @@
 					        </ul> 
 					    </div>
 					</div> 
-					
+					</ul>
 					<form id="moveForm" method="get">
 					    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">

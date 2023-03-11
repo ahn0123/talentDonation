@@ -73,12 +73,9 @@
 							</tbody>
 						</table>
 					</div> <!-- end of Table -->
-					<!-- 버튼영역 -->
-					<ul class="actions special">
-						<li><input type="button" value="등록" class="button primary" onclick="location.href='addKeyword'"></li>
-					</ul>
 					
 					<!--  페이징 시작 -->
+					<ul class="actions special">
 					<div class="pageInfo_wrap">
 					    <div class="paging">
 					        <ul id="pageInfo" class="pageInfo">
@@ -107,7 +104,7 @@
 					        </ul> 
 					    </div>
 					</div> 
-					
+					</ul>
 					<form id="moveForm" method="get">
 					    <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
@@ -116,6 +113,10 @@
 		               
 					</form>
 					<!--//페이징 종료-->
+					<!-- 버튼영역 -->
+					<ul class="actions special">
+						<li><input type="button" value="등록" class="button primary" onclick="location.href='addKeyword'"></li>
+					</ul>
 				</div> <!-- end of content -->
 
 			</div>
