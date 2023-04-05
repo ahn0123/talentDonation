@@ -95,7 +95,12 @@
 						</div>
 						<ul class="feature-icons">
 							<li><a href="program/programApplyList"><span class="icon solid fa-laptop"></span><span class="label">교육과정</span></a></li>
+							<c:if test="${memType == 1 || empty sessionId}">
 							<li><a href="myPage/recordListMember"><span class="icon solid fa-wifi"></span><span class="label">교육일지</span></a></li>
+							</c:if>
+							<c:if test="${memType == 2}">
+							<li><a href="myPage/recordListTrainer"><span class="icon solid fa-wifi"></span><span class="label">교육일지</span></a></li>
+							</c:if>
 							<li><a href="review/reviewList"><span class="icon solid fa-cloud"></span><span class="label">교육후기</span></a></li>
 						</ul>
 					</div>
@@ -231,7 +236,7 @@
 											<tr>
 												<th style="text-align:center;">랭킹</th>
 												<th style="text-align:center;">교육과정명</th>
-												<th style="text-align:center;">트레이너명</th>												
+												<th style="text-align:center;">트레이너ID</th>												
 											</tr>
 										</thead>
 										<tbody>

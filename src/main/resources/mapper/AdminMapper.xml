@@ -184,13 +184,13 @@
                     <trim prefix="OR">
                         <choose>
                         	<when test="type == 'N'.toString()">
-                                m.mem_name LIKE '%'|| #{keyword} ||'%'
+                                mem_name LIKE '%'|| #{keyword} ||'%'
                             </when>
                             <when test="type == 'T'.toString()">
-                                m.mem_tel LIKE '%'|| #{keyword} ||'%'
+                                mem_tel LIKE '%'|| #{keyword} ||'%'
                             </when>
                             <when test="type == 'P'.toString()">
-                                p.prog_title LIKE '%'|| #{keyword} ||'%'
+                                prog_title LIKE '%'|| #{keyword} ||'%'
                             </when>                            
                         </choose>
                     </trim>

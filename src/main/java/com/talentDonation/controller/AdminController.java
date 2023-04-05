@@ -178,7 +178,7 @@ public class AdminController {
     @PostMapping("/addKeyword")
     public String addKeyword(Model model, @ModelAttribute Keyword keyword) {
     	adminMapper.addKeyword(keyword);
-        return "admin/addKeyword";
+        return "redirect:/admin/keywordList";
     }
 
     // 키워드id 중복확인

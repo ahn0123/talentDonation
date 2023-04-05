@@ -11,6 +11,13 @@
 	<meta name="keywords" content="" />
     <link rel="stylesheet" href="../assets/css/main.css" />
     
+    <!-- datepicker 달력  -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="../assets/js/datepicker-ko.js"></script>
+    <script src="../assets/js/datepicker.js"></script>
+    
 </head>
 <body class="is-preload">
 	<c:if test="${empty sessionId}">
@@ -56,7 +63,7 @@
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">모집마감일</label>
 									<fmt:formatDate var="progDue" value="${list.progDue}" pattern="yyyy-MM-dd"/>
-									<input name="progDue" id="progDue" type="text" value="${progDue}" />
+									<input name="progDue" id="progDue" type="text" class="datepicker inpType" value="${progDue}" />
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">트레이너명</label>
@@ -69,12 +76,12 @@
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">시작일</label>
 									<fmt:formatDate var="progStartDate" value="${list.progStartDate}" pattern="yyyy-MM-dd"/>
-									<input name="progStartDate" id="progStartDate" type="text" value="${progStartDate}" />
+									<input name="progStartDate" id="progStartDate" type="text" class="datepicker inpType" value="${progStartDate}" />
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">종료일</label>
 									<fmt:formatDate var="progEndDate" value="${list.progEndDate}" pattern="yyyy-MM-dd"/>
-									<input name="progEndDate" id="progEndDate" type="text" value="${progEndDate}" />
+									<input name="progEndDate" id="progEndDate" type="text" class="datepicker inpType" value="${progEndDate}" />
 								</div>
 								<div class="field">
 									<label style="text-align: left; color:cornflowerblue">모집상태</label>
@@ -114,7 +121,7 @@
 	<%@include file ="../footer.jsp" %>
 	
 <!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
+<!-- <script src="../assets/js/jquery.min.js"></script> -->
 <script src="../assets/js/jquery.dropotron.min.js"></script>
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
@@ -183,6 +190,18 @@
 		});
 		
 	});
+	
+	$("#progDue").datepicker({
+    	language: 'ko'
+    });
+	
+	$("#progStartDate").datepicker({
+    	language: 'ko'
+    });
+	
+	$("#progEndDate").datepicker({
+    	language: 'ko'
+    });
 </script>
 
 </body>
